@@ -34,6 +34,7 @@
 					<div class="account-content">
 						<div class="account-box">
 							<div class="login-right">
+
 								<div class="login-header">
 									<h3><span>MentorQuest</span> <span style="color: grey;"> || </span>Mentee Login</h3>
 									<p class="text-muted">Access to our dashboard</p>
@@ -66,7 +67,7 @@
 										<a class="forgot-link" href="{{ route('password.request') }}">Forgot Password ?</a>
 									</div>
 									<button class="btn btn-primary login-btn" type="submit">Login</button>
-									<div  class="text-center dont-have">Don’t have an account? <a href="{{route('register')}}">Register</a></div>
+									<div  class="text-center dont-have">Don't have an account? <a href="{{route('register')}}">Register</a></div>
 								</form>
 							</div>
 						</div>

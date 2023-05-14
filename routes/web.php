@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Auth\Mentee\MenteeLoginController;
 use App\Http\Controllers\Auth\Mentee\MenteeRegisterController;
+use App\Http\Controllers\V1\Mentee\Booking\MentorBookingController;
 use App\Http\Controllers\V1\Mentee\MenteeController;
+use App\Http\Controllers\V1\Mentee\MenteeProfile\MenteeProfileController;
+use App\Http\Controllers\V1\Mentee\MentorProfileController;
 use App\Http\Controllers\V1\Mentee\MentorSearchController;
 use App\Http\Controllers\V1\Mentor\Appointments\AppointmentsController;
 use App\Http\Controllers\V1\Mentor\Profile\AboutController;
@@ -94,8 +97,31 @@ Route::prefix('mentee/login')->controller(MenteeLoginController::class)->middlew
 //Mentee logout
 Route::post('mentee/logout' , [MenteeLoginController::class , 'logout'])->name('mentee.logout');
 
-//Mentee search for mentors
-Route::prefix('mentee/mentor-search')->controller(MentorSearchController::class)->middleware('auth:mentee')->group(function () {
-    Route::get('/', 'index')->name('mentee.mentor_search');
+//Mentee Profile
+Route::prefix('mentee')->middleware('auth:mentee')->group(function () {
+    Route::get('profile-settings', [MenteeProfileController::class,'profileSettings'])->name('mentee.profile-settings');
+    Route::get('favourites', [MenteeProfileController::class,'viewFavourites'])->name('mentee.favourites');
 });
+
+//Mentee actions
+Route::prefix('mentor')->middleware('auth:mentee')->group(function () {
+    //Mentee searchs for mentors
+    Route::get('search', [MentorSearchController::class,'index'])->name('mentee.mentor_search');
+    Route::post('/{mentor}/favorite', [MentorProfileController::class,'toggleFavorite'])->name('mentors.favorite');
+    Route::get('profile/{id}', [MentorProfileController::class,'index'])->name('mentee.mentor_profile');
+
+
+//Mentee's Booking
+    Route::prefix('booking')->controller(MentorBookingController::class)->group(function () {
+        Route::get('plan/{id}','bookPlan')->name('mentee.booking.plan');
+        Route::get('timings','bookTimings')->name('mentee.booking.timings');
+        Route::post('/step1',  'storeStep1')->name('step1.submit');
+        Route::get('details','bookDetails')->name('mentee.booking.details');
+        Route::post('/step2',  'storeStep2')->name('step2.submit');
+        Route::get('pay','bookPay')->name('mentee.booking.pay');
+        Route::get('checkout','checkout')->name('mentee.booking.checkout');
+        Route::post('process-payment','processPayment')->name('mentee.booking.process-payment');
+    });
+});
+
 

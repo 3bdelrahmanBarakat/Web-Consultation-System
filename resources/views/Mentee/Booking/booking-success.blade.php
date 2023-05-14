@@ -3,7 +3,7 @@
 	<head>
 
 		<meta charset="utf-8">
-		<title>MentorQuest - Mentors</title>
+		<title>Mentoring</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
 		<!-- Favicon -->
@@ -15,12 +15,6 @@
 		<!-- Fontawesome CSS -->
 		<link rel="stylesheet" href="{{asset('assets/plugins/fontawesome/css/fontawesome.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/plugins/fontawesome/css/all.min.css')}}">
-
-		<!-- Datetimepicker CSS -->
-		<link rel="stylesheet" href="{{asset('assets/css/bootstrap-datetimepicker.min.css')}}">
-
-		<!-- Select2 CSS -->
-		<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
 
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
@@ -43,7 +37,7 @@
 								<span></span>
 							</span>
 						</a>
-						<a href="{{route('mentee.dashboard')}}" class="navbar-brand logo">
+						<a href="index.html" class="navbar-brand logo">
 							<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" class="img-fluid" alt="Logo">
 						</a>
 					</div>
@@ -58,8 +52,8 @@
 						</div>
 						<ul class="main-nav">
 							<li class="has-submenu">
-								<a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
-								<ul class="submenu">
+								<a href="index.html">Home </a>
+								<!-- <ul class="submenu">
 									<li><a href="index.html">Home</a></li>
 									<li><a href="index-two.html">Home 2</a></li>
 									<li><a href="index-three.html">Home 3</a></li>
@@ -67,24 +61,85 @@
 									<li><a href="index-five.html">Home 5</a></li>
 									<li><a href="index-six.html">Home 6</a></li>
 									<li><a href="index-seven.html">Home 7</a></li>
+								</ul> -->
+							</li>
+							<li class="has-submenu">
+								<a href="">Mentor <i class="fas fa-chevron-down"></i></a>
+								<ul class="submenu">
+									<li><a href="dashboard.html">Mentor Dashboard</a></li>
+									<li><a href="bookings.html">Bookings</a></li>
+									<li><a href="schedule-timings.html">Schedule Timing</a></li>
+									<li><a href="mentee-list.html">Mentee List</a></li>
+									<li><a href="profile-mentee.html">Mentee Profile</a></li>
+									<!-- <li class="has-submenu">
+										<a href="blog.html">Blog</a>
+										<ul class="submenu">
+											<li><a href="blog.html">Blog</a></li>
+											<li><a href="blog-details.html">Blog View</a></li>
+											<li><a href="add-blog.html">Add Blog</a></li>
+											<li><a href="edit-blog.html">Edit Blog</a></li>
+										</ul>
+									</li> -->
+									<li><a href="chat.html">Chat</a></li>
+									<li><a href="invoices.html">Invoices</a></li>
+									<li><a href="profile-settings.html">Profile Settings</a></li>
+									<li><a href="reviews.html">Reviews</a></li>
+									<li><a href="mentor-register.html">Mentor Register</a></li>
 								</ul>
 							</li>
-
 							<li class="has-submenu active">
 								<a href="">Mentee <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
-									<li class="active"><a href="search.html">Search Mentor</a></li>
+									<li class="has-submenu">
+										<a href="#">Mentors</a>
+										<ul class="submenu">
+											<li><a href="map-grid.html">Map Grid</a></li>
+											<li><a href="map-list.html">Map List</a></li>
+										</ul>
+									</li>
+									<li><a href="search.html">Search Mentor</a></li>
+									<li class="active"><a href="profile.html">Mentor Profile</a></li>
 									<li><a href="bookings-mentee.html">Bookings</a></li>
+									<li><a href="checkout.html">Checkout</a></li>
+									<li><a href="booking-success.html">Booking Success</a></li>
 									<li><a href="dashboard-mentee.html">Mentee Dashboard</a></li>
 									<li><a href="favourites.html">Favourites</a></li>
 									<li><a href="chat-mentee.html">Chat</a></li>
 									<li><a href="profile-settings-mentee.html">Profile Settings</a></li>
-
+									<li><a href="change-password.html">Change Password</a></li>
 								</ul>
 							</li>
-
-
-
+							<li class="has-submenu">
+								<a href="">Pages <i class="fas fa-chevron-down"></i></a>
+								<ul class="submenu">
+									<li><a href="voice-call.html">Voice Call</a></li>
+									<li><a href="video-call.html">Video Call</a></li>
+									<li><a href="search.html">Search Mentors</a></li>
+									<li><a href="components.html">Components</a></li>
+									<li class="has-submenu">
+										<a href="invoices.html">Invoices</a>
+										<ul class="submenu">
+											<li><a href="invoices.html">Invoices</a></li>
+											<li><a href="invoice-view.html">Invoice View</a></li>
+										</ul>
+									</li>
+									<li><a href="blank-page.html">Starter Page</a></li>
+									<li><a href="login.html">Login</a></li>
+									<li><a href="register.html">Register</a></li>
+									<li><a href="forgot-password.html">Forgot Password</a></li>
+								</ul>
+							</li>
+							<!-- <li class="has-submenu">
+								<a href="">Blog <i class="fas fa-chevron-down"></i></a>
+								<ul class="submenu">
+									<li><a href="blog-list.html">Blog List</a></li>
+									<li><a href="blog-grid.html">Blog Grid</a></li>
+									<li><a href="blog-details.html">Blog Details</a></li>
+								</ul>
+							</li> -->
+							<li>
+								<a href="admin/index.html" target="_blank">Admin</a>
+							</li>
 							<li class="login-link">
 								<a href="login.html">Login / Signup</a>
 							</li>
@@ -108,20 +163,12 @@
 										<h6>{{ Auth::user()->name }}</h6>
 										<p class="text-muted mb-0">Mentee</p>
 									</div>
-
 								</div>
-								{{-- <a class="dropdown-item" href="dashboard.html">Dashboard</a> --}}
-								{{-- <a class="dropdown-item" href="profile-settings.html">Profile Settings</a> --}}
-
-                                <form  action="{{route('mentee.favourites')}}" method="GET">
-                                    @csrf
-                                    <button class="dropdown-item">Favourite Mentors</button>
-                                </form>
                                 <form  action="{{route('mentee.profile-settings')}}" method="GET">
                                     @csrf
                                     <button class="dropdown-item">Profile Settings</button>
                                 </form>
-								<form  action="{{ route('mentee.logout') }}" method="POST">
+                                <form  action="{{ route('mentee.logout') }}" method="POST">
                                     @csrf
                                     <button class="dropdown-item">Logout</button>
                                 </form>
@@ -135,208 +182,54 @@
 			</header>
 			<!-- /Header -->
 
-			<!-- Breadcrumb -->
+
+        <!-- Breadcrumb -->
 			<div class="breadcrumb-bar">
 				<div class="container-fluid">
 					<div class="row align-items-center">
-						<div class="col-md-8 col-12">
+						<div class="col-md-12 col-12">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Search</li>
+									<li class="breadcrumb-item active" aria-current="page">Booking</li>
 								</ol>
 							</nav>
-							{{-- <h2 class="breadcrumb-title">2245 matches found for : Mentors In  Florida</h2> --}}
-
-						</div>
-
-
-						<div class="col-md-4 col-12 d-md-block d-none">
-							<div class="sort-by">
-								<span class="sort-title">Sort by</span>
-								<span class="sortby-fliter">
-									<select class="select">
-										<option>Select</option>
-										<option class="sorting">Rating</option>
-										<option class="sorting">Popular</option>
-										<option class="sorting">Latest</option>
-										<option class="sorting">Free</option>
-									</select>
-								</span>
-							</div>
+							<h2 class="breadcrumb-title">Checkout</h2>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- /Breadcrumb -->
 
-			<!-- Page Content -->
-			<div class="content">
+
+            <!-- Page Content -->
+			<div class="content success-page-cont">
 				<div class="container-fluid">
 
-					<div class="row">
-						<div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+					<div class="row justify-content-center">
+						<div class="col-lg-6">
 
-
-
-							<!-- Search Filter -->
-							<div class="card search-filter">
-
-
-								<div class="card-header">
-
-									<h4 class="card-title mb-0">Search Filter</h4>
-
-								</div>
+							<!-- Success Card -->
+							<div class="card success-card">
 								<div class="card-body">
-
-                                    <!-- Search -->
-
-							<form action="{{route('mentee.mentor_search')}}">
-								<div class="form-group search-info">
-									<input type="text" name="query" class="form-control" value="{{$query}}" placeholder="Search Mentors, Consultation Type, etc">
-								</div>
-								<button type="submit" hidden class="btn btn-primary search-btn"><i><img src="assets/img/search-submit.png" alt=""></i> <span>Search</span></button>
-							</form>
-
-						<!-- /Search -->
-								<div class="filter-widget">
-									<div class="cal-icon">
-										<input type="text" class="form-control datetimepicker" placeholder="Select Date">
-									</div>
-								</div>
-								<div class="filter-widget">
-									<h4>Gender</h4>
-									<div>
-										<label class="custom_check">
-											<input type="checkbox" name="gender_type" checked>
-											<span class="checkmark"></span> Male
-										</label>
-									</div>
-									<div>
-										<label class="custom_check">
-											<input type="checkbox" name="gender_type">
-											<span class="checkmark"></span> Female
-										</label>
-									</div>
-								</div>
-								<div class="filter-widget">
-									<h4>Select Courses</h4>
-									<div>
-										<label class="custom_check">
-											<input type="checkbox" name="select_specialist" checked>
-											<span class="checkmark"></span> Digital Marketer
-
-										</label>
-									</div>
-									<div>
-										<label class="custom_check">
-											<input type="checkbox" name="select_specialist" checked>
-											<span class="checkmark"></span> UNIX, Calculus, Trigonometry
-										</label>
-									</div>
-									<div>
-										<label class="custom_check">
-											<input type="checkbox" name="select_specialist">
-											<span class="checkmark"></span> Computer Programming
-										</label>
-									</div>
-									<div>
-										<label class="custom_check">
-											<input type="checkbox" name="select_specialist">
-											<span class="checkmark"></span> ASP.NET,Computer Gaming
-										</label>
-									</div>
-									<div>
-										<label class="custom_check">
-											<input type="checkbox" name="select_specialist">
-											<span class="checkmark"></span> HTML, Css
-										</label>
-									</div>
-									<div>
-										<label class="custom_check">
-											<input type="checkbox" name="select_specialist">
-											<span class="checkmark"></span> VB, VB.net
-										</label>
-									</div>
-								</div>
-									<div class="btn-search">
-										<button type="button" class="btn btn-block w-100">Search</button>
+									<div class="success-cont">
+										<i class="fas fa-check"></i>
+										<h3>Appointment booked Successfully!</h3>
+										{{-- <p>Appointment booked with <strong>Darren Elder</strong><br> on <strong>12 Nov 2019 5:00PM to 6:00PM</strong></p> --}}
+										<a href="invoice-view.html" class="btn btn-primary view-inv-btn">View Invoice</a>
 									</div>
 								</div>
 							</div>
-							<!-- /Search Filter -->
+							<!-- /Success Card -->
 
-						</div>
-
-						<div class="col-md-12 col-lg-8 col-xl-9">
-
-							<!-- Mentor Widget -->
-                            @if (count($results) > 0)
-                            @foreach ($results as $result )
-
-
-							<div class="card">
-								<div class="card-body">
-									<div class="mentor-widget">
-										<div class="user-info-left">
-											<div class="mentor-img">
-												<a href="{{route('mentee.mentor_profile', $result->mentor_id)}}">
-													<img  src="{{ url('public/Image/'.$result->photo) }}" class="img-fluid" alt="User Image">
-												</a>
-											</div>
-											<div class="user-info-cont">
-												<h4 class="usr-name"><a href="{{route('mentee.mentor_profile', $result->mentor_id)}}">{{$result->fname}} {{$result->lname}}</a></h4>
-												<p class="mentor-type">{{$result->company_name}}</p>
-												<div class="rating">
-													<i class="fas fa-star filled"></i>
-													<i class="fas fa-star filled"></i>
-													<i class="fas fa-star filled"></i>
-													<i class="fas fa-star filled"></i>
-													<i class="fas fa-star"></i>
-													{{-- <span class="d-inline-block average-rating">(17)</span> --}}
-												</div>
-												<div class="mentor-details">
-													<p class="user-location"><i class="fas fa-map-marker-alt"></i> {{$result->city}}, {{$result->country}}</p>
-												</div>
-											</div>
-										</div>
-										<div class="user-info-right">
-											<div class="user-infos">
-												{{-- <ul>
-													<li><i class="far fa-comment"></i> 17 Feedback</li>
-													<li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
-													<li><i class="far fa-money-bill-alt"></i> $300 - $1000 <i class="fas fa-info-circle" data-bs-toggle="tooltip" title="Lorem Ipsum"></i> </li>
-												</ul> --}}
-											</div>
-											<div class="mentor-booking">
-												<a class="apt-btn" href="{{route('mentee.mentor_profile', $result->mentor_id)}}">View Profile</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-                            @endforeach
-                            @else
-                            <h1>No results found</h1>
-                            @endif
-							<!-- /Mentor Widget -->
-
-
-
-							<div class="load-more text-center">
-								<a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
-							</div>
 						</div>
 					</div>
 
 				</div>
-
 			</div>
 			<!-- /Page Content -->
 
-			<!-- Footer -->
+            <!-- Footer -->
 			<footer class="footer">
 
 				<!-- Footer Top -->
@@ -419,15 +312,15 @@
 									<div class="footer-contact-info">
 										<div class="footer-address">
 											<span><i class="fas fa-map-marker-alt"></i></span>
-											<p> 3556  Beech Street, San Francisco,<br> California, CA 94108 </p>
+											<p> Shourok academy<br> Cairo, Egypt </p>
 										</div>
 										<p>
 											<i class="fas fa-phone-alt"></i>
-											+1 315 369 5943
+											+201066689867
 										</p>
 										<p class="mb-0">
 											<i class="fas fa-envelope"></i>
-											mentoring@example.com
+											themigsss0@gmail.com
 										</p>
 									</div>
 								</div>
@@ -449,7 +342,7 @@
 							<div class="row">
 								<div class="col-12 text-center">
 									<div class="copyright-text">
-										<p class="mb-0">&copy; 2020 Mentoring. All rights reserved.</p>
+										<p class="mb-0">&copy; 2023 MentorQuest. All rights reserved.</p>
 									</div>
 								</div>
 							</div>
@@ -466,25 +359,74 @@
 		</div>
 		<!-- /Main Wrapper -->
 
+		<!-- Voice Call Modal -->
+		<div class="modal fade call-modal" id="voice_call">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<!-- Outgoing Call -->
+						<div class="call-box incoming-box">
+							<div class="call-wrapper">
+								<div class="call-inner">
+									<div class="call-user">
+										<img alt="User Image" src="{{asset('assets/img/user/user.jpg')}}" class="call-avatar">
+										<h4>{{ Auth::user()->fname }} {{ Auth::user()->lname }}</h4>
+										<span>Connecting...</span>
+									</div>
+									<div class="call-items">
+										<a href="javascript:void(0);" class="btn call-item call-end" data-dismiss="modal" aria-label="Close"><i class="material-icons">call_end</i></a>
+										<a href="voice-call.html" class="btn call-item call-start"><i class="material-icons">call</i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Outgoing Call -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Voice Call Modal -->
+
+		<!-- Video Call Modal -->
+		<div class="modal fade call-modal" id="video_call">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+
+						<!-- Incoming Call -->
+						<div class="call-box incoming-box">
+							<div class="call-wrapper">
+								<div class="call-inner">
+									<div class="call-user">
+										<img class="call-avatar" src="{{asset('assets/img/user/user.jpg')}}" alt="User Image">
+										<h4>Dr. Darren Elder</h4>
+										<span>Calling ...</span>
+									</div>
+									<div class="call-items">
+										<a href="javascript:void(0);" class="btn call-item call-end" data-dismiss="modal" aria-label="Close"><i class="material-icons">call_end</i></a>
+										<a href="video-call.html" class="btn call-item call-start"><i class="material-icons">videocam</i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Incoming Call -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Video Call Modal -->
+
 		<!-- jQuery -->
 		<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
 
 		<!-- Bootstrap Core JS -->
 		<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 
-		<!-- Sticky Sidebar JS -->
-        <script src="{{asset('assets/plugins/theia-sticky-sidebar/ResizeSensor.js')}}"></script>
-        <script src="{{asset('assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')}}"></script>
-
-		<!-- Select2 JS -->
-		<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-
-		<!-- Datetimepicker JS -->
-		<script src="{{asset('assets/js/moment.min.js')}}"></script>
-		<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-
 		<!-- Custom JS -->
 		<script src="{{asset('assets/js/script.js')}}"></script>
+
 
 	</body>
 </html>

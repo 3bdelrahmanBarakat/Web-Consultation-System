@@ -44,13 +44,13 @@
 								<span></span>
 							</span>
 						</a>
-						<a href="index.html" class="navbar-brand logo">
+						<a href="{{route('mentee.dashboard')}}" class="navbar-brand logo">
 							<img src="assets/img/logo final mohamed pnggggggg-01.png" class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
-							<a href="index.html" class="menu-logo">
+							<a href="{{route('mentee.dashboard')}}" class="menu-logo">
 								<img src="assets/img/logo final mohamed pnggggggg-01.png" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -192,7 +192,7 @@
 						<div class="search-box">
 							<form action="{{route('mentee.mentor_search')}}">
 								<div class="form-group search-info">
-									<input type="text" class="form-control" placeholder="Search Mentors, Consultation Type, etc">
+									<input type="text" name="query" class="form-control" placeholder="Search Mentors, Consultation Type, etc">
 								</div>
 								<button type="submit" class="btn btn-primary search-btn"><i><img src="assets/img/search-submit.png" alt=""></i> <span>Search</span></button>
 							</form>

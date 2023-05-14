@@ -4,7 +4,7 @@ namespace App\Http\Controllers\V1\Mentor\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Mentor\Profile_settings\ProfileSettingsRequest;
-use App\Models\Mentor;
+use App\Models\Mentor\Mentor;
 use App\Models\Mentor\Profile\Experience;
 use App\Models\Mentor\Profile\MentorAbout;
 use Illuminate\Contracts\View\View;

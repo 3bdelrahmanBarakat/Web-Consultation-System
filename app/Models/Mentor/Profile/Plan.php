@@ -12,4 +12,10 @@ class Plan extends Model
     protected $table = 'plans';
     protected $guarded = [];
 
+
+    public function mentor()
+    {
+        return $this->belongsToMany(Mentor::class);
+    }
+
 }
