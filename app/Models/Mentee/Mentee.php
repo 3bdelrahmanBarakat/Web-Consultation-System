@@ -5,6 +5,7 @@ namespace App\Models\Mentee;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Booking\Booking;
+use App\Models\Chat\Message;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,6 +16,7 @@ class Mentee extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guard = 'mentee';
+    protected $table = 'mentees';
 
     /**
      * The attributes that are mass assignable.
@@ -55,6 +57,11 @@ class Mentee extends Authenticatable
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 
 }

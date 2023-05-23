@@ -6,6 +6,8 @@
 		<title>Mentoring</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
 		<!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
@@ -18,9 +20,10 @@
 
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+        @livewireStyles
 
 	</head>
-	<body>
+	<body class="chat-page">
 
 		<!-- Main Wrapper -->
 		<div class="main-wrapper">
@@ -37,13 +40,13 @@
 								<span></span>
 							</span>
 						</a>
-						<a href="index.html" class="navbar-brand logo">
+						<a href="{{route('home')}}" class="navbar-brand logo">
 							<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
-							<a href="index.html" class="menu-logo">
+							<a href="{{route('home')}}" class="menu-logo">
 								<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -52,8 +55,8 @@
 						</div>
 						<ul class="main-nav">
 							<li class="has-submenu">
-								<a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
-								<ul class="submenu">
+								<a href="index.html">Home </a>
+								<!-- <ul class="submenu">
 									<li><a href="index.html">Home</a></li>
 									<li><a href="index-two.html">Home 2</a></li>
 									<li><a href="index-three.html">Home 3</a></li>
@@ -61,7 +64,7 @@
 									<li><a href="index-five.html">Home 5</a></li>
 									<li><a href="index-six.html">Home 6</a></li>
 									<li><a href="index-seven.html">Home 7</a></li>
-								</ul>
+								</ul> -->
 							</li>
 							<li class="has-submenu">
 								<a href="">Mentor <i class="fas fa-chevron-down"></i></a>
@@ -71,7 +74,7 @@
 									<li><a href="schedule-timings.html">Schedule Timing</a></li>
 									<li><a href="mentee-list.html">Mentee List</a></li>
 									<li><a href="profile-mentee.html">Mentee Profile</a></li>
-									<li class="has-submenu">
+									<!-- <li class="has-submenu">
 										<a href="blog.html">Blog</a>
 										<ul class="submenu">
 											<li><a href="blog.html">Blog</a></li>
@@ -79,7 +82,7 @@
 											<li><a href="add-blog.html">Add Blog</a></li>
 											<li><a href="edit-blog.html">Edit Blog</a></li>
 										</ul>
-									</li>
+									</li> -->
 									<li><a href="chat.html">Chat</a></li>
 									<li><a href="invoices.html">Invoices</a></li>
 									<li><a href="profile-settings.html">Profile Settings</a></li>
@@ -87,7 +90,7 @@
 									<li><a href="mentor-register.html">Mentor Register</a></li>
 								</ul>
 							</li>
-							<li class="has-submenu">
+							<li class="has-submenu active">
 								<a href="">Mentee <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
 									<li class="has-submenu">
@@ -98,7 +101,7 @@
 										</ul>
 									</li>
 									<li><a href="search.html">Search Mentor</a></li>
-									<li><a href="profile.html">Mentor Profile</a></li>
+									<li class="active"><a href="profile.html">Mentor Profile</a></li>
 									<li><a href="bookings-mentee.html">Bookings</a></li>
 									<li><a href="checkout.html">Checkout</a></li>
 									<li><a href="booking-success.html">Booking Success</a></li>
@@ -129,14 +132,14 @@
 									<li><a href="forgot-password.html">Forgot Password</a></li>
 								</ul>
 							</li>
-							<li class="has-submenu">
+							<!-- <li class="has-submenu">
 								<a href="">Blog <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
 									<li><a href="blog-list.html">Blog List</a></li>
 									<li><a href="blog-grid.html">Blog Grid</a></li>
 									<li><a href="blog-details.html">Blog Details</a></li>
 								</ul>
-							</li>
+							</li> -->
 							<li>
 								<a href="admin/index.html" target="_blank">Admin</a>
 							</li>
@@ -180,118 +183,96 @@
 			</header>
 			<!-- /Header -->
 
-			<!-- Breadcrumb -->
-			<div class="breadcrumb-bar">
-				<div class="container-fluid">
-					<div class="row align-items-center">
-						<div class="col-md-12 col-12">
-							<nav aria-label="breadcrumb" class="page-breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Bookings</li>
-								</ol>
-							</nav>
-							<h2 class="breadcrumb-title">Bookings</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /Breadcrumb -->
-
 			<!-- Page Content -->
 			<div class="content">
 				<div class="container-fluid">
-
+					<div class="settings-back mb-3">
+						<a href="dashboard.html">
+							<i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
+						</a>
+					</div>
 					<div class="row">
-						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+						<div class="col-sm-12 mb-4">
+							<div class="chat-window">
 
-							<!-- Sidebar -->
-							<div class="profile-sidebar">
-								<div class="user-widget">
-									<div class="pro-avatar">A</div>
-									<div class="rating">
-										<i class="fas fa-star filled"></i>
-										<i class="fas fa-star filled"></i>
-										<i class="fas fa-star filled"></i>
-										<i class="fas fa-star filled"></i>
-										<i class="fas fa-star"></i>
-									</div>
-									<div class="user-info-cont">
-										<h4 class="usr-name">{{ Auth::user()->fname }}</h4>
-										<p class="mentor-type">English Literature (M.A)</p>
-									</div>
-								</div>
-								<div class="progress-bar-custom">
-									<h6>Complete your profiles ></h6>
-									<div class="pro-progress">
-									  <div class="tooltip-toggle" tabindex="0"></div>
-									   <div class="tooltip">80%</div>
-									</div>
-								</div>
-								<div class="custom-sidebar-nav">
-									<ul>
-										<li><a href="{{route('home')}}" class="active"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="{{route('appointments.index')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="{{route('schedule-timings.index')}}"><i class="fas fa-hourglass-start"></i>Schedule Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="#"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="{{route('mentor.chat.show')}}"><i class="fas fa-comments"></i>Messages <span><i class="fas fa-chevron-right"></i></span></a></li>
-										{{-- <li><a href="invoices.html"><i class="fas fa-file-invoice"></i>Invoices <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="reviews.html"><i class="fas fa-eye"></i>Reviews <span><i class="fas fa-chevron-right"></i></span></a></li> --}}
-										<!-- <li><a href="blog.html"><i class="fab fa-blogger-b"></i>Blog <span><i class="fas fa-chevron-right"></i></span></a></li> -->
-										<li><a href="{{route('profile-settings.edit')}}"><i class="fas fa-user-cog"></i>Profile <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li>
-                                            <form  action="{{ route('logout') }}" method="POST">
-                                            @csrf
-                                             <button style="background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"  href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                                             <span style="float: right"><i class="fas fa-chevron-right"></i></span>
-                                             </form>
-                                        </li>
-									</ul>
-								</div>
-							</div>
-							<!-- /Sidebar -->
-
-						</div>
-
-						<div class="col-md-7 col-lg-8 col-xl-9">
-							<div class="appointments">
-                                @foreach ($bookings as $booking )
-
-                                <!-- Appointment List -->
-								<div class="appointment-list">
-									<div class="profile-info-widget">
-										<a href="profile-mentee.html" class="booking-user-img">
-											<img src="{{asset('assets/img/user/user2.jpg')}}" alt="User Image">
-										</a>
-										<div class="profile-det-info">
-											<h3><a href="profile-mentee.html">{{$booking['mentee']['name']}}</a></h3>
-											<div class="mentee-details">
-												{{-- <h5><i class="far fa-clock"></i> 14 Nov 2019, 10.00 AM</h5> --}}
-												<h5><i class="fas fa-envelope"></i>{{$booking['mentee']['email']}}</h5>
-												<h5 class="mb-0"><i class="fas fa-phone"></i> {{$booking['mentee']['username']}}</h5>
+								<!-- Chat Left -->
+								<div class="chat-cont-left">
+									<form class="chat-search d-flex align-items-center">
+										<div class="avatar avatar-online me-3">
+											<img src="{{ url('public/Image/'.$about->photo) }}" alt="User Image" class="avatar-img rounded-circle">
+										</div>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<i class="fas fa-search"></i>
 											</div>
+											<input type="text" class="form-control rounded-pill" placeholder="Search">
+										</div>
+									</form>
+									<div class="chat-header">
+										<span>Chats</span>
+									</div>
+									<div class="chat-users-list">
+										<div class="chat-scroll">
+                                            @foreach ($mentees as $mentee )
+
+											<a href="{{route('mentor.chat',$mentee['mentee_id'])}}" class="media d-flex">
+												<div class="media-img-wrap flex-shrink-0">
+													<div class="avatar avatar-away">
+														<img src="{{asset('assets/img/user/user14.jpg')}}" alt="User Image" class="avatar-img rounded-circle">
+													</div>
+												</div>
+												<div class="media-body flex-grow-1">
+													<div>
+														<div class="user-name">{{$mentee['mentee']['name']}}</div>
+														{{-- <div class="user-last-chat">Hey, How are you?</div> --}}
+													</div>
+													<div>
+														{{-- <div class="last-chat-time block">2 min</div> --}}
+														<div class="badge badge-success badge-pill fill-blue rounded-pill">0</div>
+													</div>
+												</div>
+											</a>
+                                            @endforeach
+
+
+
+
+
+
+
+
+
 										</div>
 									</div>
-									<div class="appointment-action">
-										<a href="#" class="btn btn-sm bg-info-light" data-bs-toggle="modal" data-bs-target="#appt_details{{$booking->id}}">
-											<i class="far fa-eye"></i> View
-										</a>
-										<a href="#" class="btn btn-sm bg-success-light" data-bs-toggle="modal" data-bs-target="#accept_details">
-											<i class="fas fa-check"></i> Accept
-										</a>
-										<a href="#" class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-bs-target="#cancel_details">
-											<i class="fas fa-times"></i> Cancel
-										</a>
-									</div>
 								</div>
-								<!-- /Appointment List -->
+								<!-- /Chat Left -->
 
-                                @endforeach
+								<!-- Chat Right -->
+								<div class="chat-cont-right">
+									<div class="chat-header">
+										<a id="back_user_list" href="javascript:void(0)" class="back-user-list">
+											<i class="material-icons">chevron_left</i>
+										</a>
+										<div class="media d-flex">
 
+
+										</div>
+
+									</div>
+									<div class="chat-body">
+										<div class="chat-scroll">
+                                            <br><br><br>
+                                            <center><h2>Select Mentee to start </h2></center>
+										</div>
+									</div>
+
+								</div>
+								<!-- /Chat Right -->
 
 							</div>
 						</div>
 					</div>
+					<!-- /Row -->
 
 				</div>
 
@@ -310,7 +291,7 @@
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
 									<div class="footer-logo">
-										<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" alt="logo">
+										<img src="assets/img/logo.png" alt="logo">
 									</div>
 									<div class="footer-about-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -427,72 +408,67 @@
 
 		</div>
 		<!-- /Main Wrapper -->
-        @foreach ($bookings as $booking )
 
-        <!-- Appointment Details Modal -->
-
-        <div class="modal fade custom-modal" id="appt_details{{$booking->id}}">
-			<div class="modal-dialog modal-dialog-centered">
+		<!-- Voice Call Modal -->
+		<div class="modal fade call-modal" id="voice_call">
+			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Appointment Details</h5>
-						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
 					<div class="modal-body">
-						<ul class="info-details">
-							<li>
-								<div class="details-header">
-									<div class="row">
-										<div class="col-md-6">
-											<span class="title">#APT0001</span>
-											<span class="text">{{$booking['timing']['day']}}, <br> From: {{$booking['timing']['start_time']}} <br> To:{{$booking['timing']['end_time']}}</span>
-										</div>
-										<div class="col-md-6">
-											<div class="text-end">
-												<button type="button" class="btn bg-success-light btn-sm" id="topup_status">{{$booking['status']}}</button>
-											</div>
-										</div>
+
+						<!-- Outgoing Call -->
+						<div class="call-box incoming-box">
+							<div class="call-wrapper">
+								<div class="call-inner">
+									<div class="call-user">
+										<img alt="User Image" src="assets/img/user/user.jpg" class="call-avatar">
+										<h4>Marvin Downey</h4>
+										<span>Connecting...</span>
+									</div>
+									<div class="call-items">
+										<a href="javascript:void(0);" class="btn call-item call-end" data-bs-dismiss="modal" aria-label="Close"><i class="material-icons">call_end</i></a>
+										<a href="voice-call.html" class="btn call-item call-start"><i class="material-icons">call</i></a>
 									</div>
 								</div>
-							</li>
-							<li>
-								<span class="title">Status:</span>
-								<span class="text">{{$booking['status']}}</span>
-							</li>
-							{{-- <li>
-								<span class="title">Confirm Date:</span>
-								<span class="text">29 Jun 2019</span>
-							</li> --}}
-							<li>
-								<span class="title">Paid Amount</span>
-								<span class="text">${{$booking['total_fees']}}</span>
-							</li>
-							<li>
-								<span class="title">Brief word about me and Why am I seeking your help</span>
-								<span class="text">{{$booking['message1']}}</span>
-							</li>
-							<li>
-								<span class="title">My goal and steps I need to take</span>
-								<span class="text">{{$booking['message2']}}</span>
-							</li>
-							<li>
-								<span class="title">Areas I need guiding in</span>
-								<span class="text">{{$booking['message3']}}</span>
-							</li>
-							<li>
-								<span class="title">The biggest challenges I am facing</span>
-								<span class="text">{{$booking['message4']}}</span>
-							</li>
-						</ul>
+							</div>
+						</div>
+						<!-- Outgoing Call -->
+
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- /Appointment Details Modal -->
+		<!-- /Voice Call Modal -->
 
-        @endforeach
+		<!-- Video Call Modal -->
+		<div class="modal fade call-modal" id="video_call">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+
+						<!-- Incoming Call -->
+						<div class="call-box incoming-box">
+							<div class="call-wrapper">
+								<div class="call-inner">
+									<div class="call-user">
+										<img class="call-avatar" src="assets/img/user/user.jpg" alt="User Image">
+										<h4>Richard Wilson</h4>
+										<span>Calling ...</span>
+									</div>
+									<div class="call-items">
+										<a href="javascript:void(0);" class="btn call-item call-end" data-bs-dismiss="modal" aria-label="Close"><i class="material-icons">call_end</i></a>
+										<a href="video-call.html" class="btn call-item call-start"><i class="material-icons">videocam</i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Incoming Call -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Video Call Modal -->
+
 
 
 		<!-- jQuery -->
@@ -500,10 +476,6 @@
 
 		<!-- Bootstrap Core JS -->
 		<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-
-		<!-- Sticky Sidebar JS -->
-        <script src="{{asset('assets/plugins/theia-sticky-sidebar/ResizeSensor.js')}}"></script>
-        <script src="{{asset('assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')}}"></script>
 
 		<!-- Custom JS -->
 		<script src="{{asset('assets/js/script.js')}}"></script>

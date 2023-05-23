@@ -3,17 +3,21 @@
 use App\Http\Controllers\Auth\Mentee\MenteeLoginController;
 use App\Http\Controllers\Auth\Mentee\MenteeRegisterController;
 use App\Http\Controllers\V1\Mentee\Booking\MentorBookingController;
+use App\Http\Controllers\V1\Mentee\Chat\MenteeChatController;
 use App\Http\Controllers\V1\Mentee\MenteeController;
 use App\Http\Controllers\V1\Mentee\MenteeProfile\MenteeProfileController;
 use App\Http\Controllers\V1\Mentee\MentorProfileController;
 use App\Http\Controllers\V1\Mentee\MentorSearchController;
 use App\Http\Controllers\V1\Mentor\Appointments\AppointmentsController;
+use App\Http\Controllers\V1\Mentor\Chat\MentorChatController;
+use App\Http\Controllers\V1\Mentor\Meeting\OnlineMeetingsController;
 use App\Http\Controllers\V1\Mentor\Profile\AboutController;
 use App\Http\Controllers\V1\Mentor\Profile\ExperienceController;
 use App\Http\Controllers\V1\Mentor\Profile\PlanController;
 use App\Http\Controllers\V1\Mentor\Profile\ProfileController;
 use App\Http\Controllers\V1\Mentor\Profile\ProfileSettingsController;
 use App\Http\Controllers\V1\Mentor\Schedule_Timings\ScheduleTimingsController;
+use App\Http\Livewire\Chat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -74,9 +78,23 @@ Route::prefix('mentor/schedule-timings')->controller(ScheduleTimingsController::
 Route::get('mentor/profile' , [ProfileController::class , 'index'])->name('mentor.profile')->middleware(['auth', 'verified', 'profile']);
 
 
+//Mentor Meetings
+Route::prefix('mentor/meetings')->controller(OnlineMeetingsController::class)->middleware(['auth', 'verified', 'profile'])->group(function () {
+    Route::get('/', 'index')->name('mentor.meetings');
+    Route::post('store', 'store')->name('mentor.meetings.store');
+});
+
 //Mentor Appointments
 Route::prefix('mentor/appointments')->controller(AppointmentsController::class)->middleware(['auth', 'verified', 'profile'])->group(function () {
     Route::get('/', 'index')->name('appointments.index');
+});
+
+//Mentor chat
+Route::prefix('mentor')->controller(MentorChatController::class)->middleware(['auth', 'verified', 'profile'])->group(function () {
+    Route::get('chat/show','showMentees')->name('mentor.chat.show');
+    Route::get('chat/{id}','index')->name('mentor.chat');
+    Route::post('chat/store','store')->name('mentor.chat.store');
+    Route::get('chat/latest/{id}','latest')->name('mentor.chat.latest');
 });
 
 //Mentee Routes
@@ -100,7 +118,14 @@ Route::post('mentee/logout' , [MenteeLoginController::class , 'logout'])->name('
 //Mentee Profile
 Route::prefix('mentee')->middleware('auth:mentee')->group(function () {
     Route::get('profile-settings', [MenteeProfileController::class,'profileSettings'])->name('mentee.profile-settings');
+    Route::post('profile-settings/update', [MenteeProfileController::class,'profileSettingsUpdate'])->name('mentee.profile-settings.update');
+    Route::get('reset-password', [MenteeProfileController::class,'resetPassword'])->name('mentee.reset-password');
+    Route::post('reset-password/update', [MenteeProfileController::class,'resetPasswordUpdate'])->name('mentee.reset-password.update');
     Route::get('favourites', [MenteeProfileController::class,'viewFavourites'])->name('mentee.favourites');
+//Mentee Chat
+    Route::get('chat/{id}', [MenteeChatController::class ,'index'])->name('mentee.chat');
+    Route::post('chat/store', [MenteeChatController::class ,'store'])->name('mentee.chat.store');
+    Route::get('chat/latest/{id}', [MenteeChatController::class ,'latest'])->name('mentee.chat.latest');
 });
 
 //Mentee actions
@@ -123,5 +148,7 @@ Route::prefix('mentor')->middleware('auth:mentee')->group(function () {
         Route::post('process-payment','processPayment')->name('mentee.booking.process-payment');
     });
 });
+
+
 
 

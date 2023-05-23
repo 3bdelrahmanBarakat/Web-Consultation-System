@@ -121,10 +121,10 @@
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
+									<li class="breadcrumb-item active" aria-current="page">Reset Password</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title">Profile Settings</h2>
+							<h2 class="breadcrumb-title">Reset Password</h2>
 						</div>
 					</div>
 				</div>
@@ -179,9 +179,9 @@
                                     </div>
                                     @endif
 
-                                    @if (session()->has('Update'))
+                                    @if (session()->has('Reset Password'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{ session()->get('Update') }}</strong>
+                            <strong>{{ session()->get('Reset Password') }}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -189,7 +189,7 @@
                     @endif
 
 									<!-- Profile Settings Form -->
-									<form action="{{route('mentee.profile-settings.update')}}" method="POST">
+									<form action="{{route('mentee.reset-password.update')}}" method="POST">
                                         @csrf
 										<div class="row form-row">
 											<div class="col-12 col-md-12">
@@ -200,33 +200,27 @@
 													</div>
 												</div>
 											</div>
-											<div class="">
-												<div class="form-group">
-													<label> Name</label>
-													<input required type="text" name="name" class="form-control" value="{{$mentee['name']}}">
-												</div>
-											</div>
+
 
 											<br>
 
 											<div class="">
 												<div class="form-group">
-													<label>Email </label>
-													<input type="email" name="email" class="form-control" disabled value="{{$mentee['email']}}">
+													<label>Old Password </label>
+													<input type="password" name="old_password" class="form-control" >
 												</div>
 											</div>
 											<div class="">
 												<div class="form-group">
-													<label>Username </label>
-													<input required type="text" name="username" class="form-control" value="{{$mentee['username']}}">
+													<label>New Password </label>
+													<input required type="password" name="password" class="form-control" >
 												</div>
 											</div>
 											<div class="">
-												{{-- <div class="form-group">
-													<label> Password </label>
-													<input type="password" class="form-control" value="********">
-												</div> --}}
-												<a class="blue-btn" href="{{route('mentee.reset-password')}}">Change Password</a>
+												<div class="form-group">
+													<label> Confirm New Password </label>
+													<input type="password" name="password_confirmation"  class="form-control">
+												</div>
 											</div>
 										<div class="submit-section">
 											<button style="margin-top: 10px

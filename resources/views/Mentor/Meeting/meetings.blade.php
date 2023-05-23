@@ -254,42 +254,69 @@
 						</div>
 
 						<div class="col-md-7 col-lg-8 col-xl-9">
-							<div class="appointments">
-                                @foreach ($bookings as $booking )
+							<h3 class="pb-3">Meetings Summary</h3>
+                            <a href="#" class="btn btn-sm bg-info-light" data-bs-toggle="modal" data-bs-target="#appt_details">
+                                <i class="fas fa-plus"></i></i> Create Meeting
+                            </a>
 
-                                <!-- Appointment List -->
-								<div class="appointment-list">
-									<div class="profile-info-widget">
-										<a href="profile-mentee.html" class="booking-user-img">
-											<img src="{{asset('assets/img/user/user2.jpg')}}" alt="User Image">
-										</a>
-										<div class="profile-det-info">
-											<h3><a href="profile-mentee.html">{{$booking['mentee']['name']}}</a></h3>
-											<div class="mentee-details">
-												{{-- <h5><i class="far fa-clock"></i> 14 Nov 2019, 10.00 AM</h5> --}}
-												<h5><i class="fas fa-envelope"></i>{{$booking['mentee']['email']}}</h5>
-												<h5 class="mb-0"><i class="fas fa-phone"></i> {{$booking['mentee']['username']}}</h5>
-											</div>
+                            {{-- <div class="appointment-action">
+
+                            </div> --}}
+							<!-- Mentee List Tab -->
+							<div class="tab-pane show active" id="mentee-list">
+								<div class="card card-table">
+									<div class="card-body">
+										<div class="table-responsive">
+											<table class="table table-hover table-center mb-0">
+												<thead>
+													<tr>
+														<th>Mentee</th>
+														<th>Meeting Date</th>
+														<th class="text-center">Meeting Time</th>
+														<th class="text-center">Meeting Link</th>
+														<th class="text-center">Actions</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach ($meetings as $meeting )
+                                                    <tr>
+														<td>
+															<h2 class="table-avatar">
+																<a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="{{asset('assets/img/user/user2.jpg')}}" alt="User Image"></a>
+																<a href="profile.html">Mohamed<span>mohamed@gmail.com</span></a>
+															</h2>
+														</td>
+														<td>08 April 2020</td>
+														<td class="text-center"><span class="pending">9:00 AM</span></td>
+														<td class="text-center"><span class="pending"><a href="">https://zoom.us/start?key=5521</a></span></td>
+														<td class="text-center"><a href="profile-mentee.html" class="btn btn-sm bg-danger"><i class="fas fa-trash" style="color: #ffffff;"></i></a></td>
+													</tr>
+                                                    @endforeach
+
+												</tbody>
+											</table>
 										</div>
 									</div>
+								</div>
+							</div>
+
+
+                                <!-- Appointment List -->
+								{{-- <div class="appointment-list">
+
 									<div class="appointment-action">
-										<a href="#" class="btn btn-sm bg-info-light" data-bs-toggle="modal" data-bs-target="#appt_details{{$booking->id}}">
+										<a href="#" class="btn btn-sm bg-info-light" data-bs-toggle="modal" data-bs-target="#appt_details">
 											<i class="far fa-eye"></i> View
 										</a>
-										<a href="#" class="btn btn-sm bg-success-light" data-bs-toggle="modal" data-bs-target="#accept_details">
-											<i class="fas fa-check"></i> Accept
-										</a>
-										<a href="#" class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-bs-target="#cancel_details">
-											<i class="fas fa-times"></i> Cancel
-										</a>
+
 									</div>
-								</div>
+								</div> --}}
 								<!-- /Appointment List -->
 
-                                @endforeach
 
 
-							</div>
+
+
 						</div>
 					</div>
 
@@ -427,72 +454,79 @@
 
 		</div>
 		<!-- /Main Wrapper -->
-        @foreach ($bookings as $booking )
+
 
         <!-- Appointment Details Modal -->
 
-        <div class="modal fade custom-modal" id="appt_details{{$booking->id}}">
+        <div class="modal fade custom-modal" id="appt_details">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">Appointment Details</h5>
+						<h5 class="modal-title">Create Meeting</h5>
 						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
-						<ul class="info-details">
-							<li>
-								<div class="details-header">
-									<div class="row">
-										<div class="col-md-6">
-											<span class="title">#APT0001</span>
-											<span class="text">{{$booking['timing']['day']}}, <br> From: {{$booking['timing']['start_time']}} <br> To:{{$booking['timing']['end_time']}}</span>
-										</div>
-										<div class="col-md-6">
-											<div class="text-end">
-												<button type="button" class="btn bg-success-light btn-sm" id="topup_status">{{$booking['status']}}</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<span class="title">Status:</span>
-								<span class="text">{{$booking['status']}}</span>
-							</li>
-							{{-- <li>
-								<span class="title">Confirm Date:</span>
-								<span class="text">29 Jun 2019</span>
-							</li> --}}
-							<li>
-								<span class="title">Paid Amount</span>
-								<span class="text">${{$booking['total_fees']}}</span>
-							</li>
-							<li>
-								<span class="title">Brief word about me and Why am I seeking your help</span>
-								<span class="text">{{$booking['message1']}}</span>
-							</li>
-							<li>
-								<span class="title">My goal and steps I need to take</span>
-								<span class="text">{{$booking['message2']}}</span>
-							</li>
-							<li>
-								<span class="title">Areas I need guiding in</span>
-								<span class="text">{{$booking['message3']}}</span>
-							</li>
-							<li>
-								<span class="title">The biggest challenges I am facing</span>
-								<span class="text">{{$booking['message4']}}</span>
-							</li>
-						</ul>
+
+
+
+					 <div class="modal-body">
+						<form method="post" action="{{route('mentor.meetings.store')}}" autocomplete="off">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="mentee_id">Mentee : <span
+                                            class="text-danger">*</span></label>
+                                    <select class="custom-select mr-sm-2" name="mentee_id">
+                                        @foreach ($mentees as $mentee )
+                                        <option value="{{$mentee['mentee_id']}}">{{$mentee['mentee']['name']}}</option>
+
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Meeting Password: <span class="text-danger">*</span></label>
+                                    <input class="form-control" name="password" type="text">
+                                </div>
+                            </div>
+
+
+                        </div><br>
+
+                        <div class="row">
+
+
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Meeting Time: <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="datetime-local" name="start_time">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Meeting Duration: <span class="text-danger">*</span></label>
+                                    <input  class="form-control"  name="duration" type="text">
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="btn btn-primary btn-sm nextBtn btn-lg pull-right"
+                            type="submit">Create</button>
+                    </form>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- /Appointment Details Modal -->
 
-        @endforeach
+
 
 
 		<!-- jQuery -->

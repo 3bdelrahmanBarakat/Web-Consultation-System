@@ -255,7 +255,7 @@
 
                                                 <div class="mentor-action">
 													<p class="mentor-type social-title">Contact Me</p>
-													<a href="javascript:void(0)" class="btn-blue">
+													<a href="{{route('mentee.chat' , $mentor->id)}}" class="btn-blue">
 														<i class="fas fa-comments"></i>
 													</a>
 													<a href="chat.html" class="btn-blue">

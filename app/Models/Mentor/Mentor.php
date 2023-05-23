@@ -5,6 +5,7 @@ namespace App\Models\Mentor;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Booking\Booking;
+use App\Models\Meeting\Meeting;
 use App\Models\Mentor\Profile\Experience;
 use App\Models\Mentor\Profile\MentorAbout;
 use App\Models\Mentor\Profile\Plan;
@@ -77,4 +78,11 @@ class Mentor extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    
 }
