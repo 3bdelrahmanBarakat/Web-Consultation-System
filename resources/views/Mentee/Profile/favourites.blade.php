@@ -59,15 +59,7 @@
 						<ul class="main-nav">
 							<li class="has-submenu">
 								<a href="{{route('mentee.mentor_search')}}">Home </a>
-								<!-- <ul class="submenu">
-									<li><a href="index.html">Home</a></li>
-									<li><a href="index-two.html">Home 2</a></li>
-									<li><a href="index-three.html">Home 3</a></li>
-									<li><a href="index-four.html">Home 4</a></li>
-									<li><a href="index-five.html">Home 5</a></li>
-									<li><a href="index-six.html">Home 6</a></li>
-									<li><a href="index-seven.html">Home 7</a></li>
-								</ul> -->
+
 							</li>
 							<li class="has-submenu">
 								<a href="">Bookings</a>
@@ -186,9 +178,7 @@
 											<a href="{{route('mentee.mentor_profile', $favorite['mentor']['id'])}}">
 												<img class="img-fluid" alt="User Image" src="{{url('public/Image/'.$favorite['mentor']['about']->photo)}}">
 											</a>
-											<a href="javascript:void(0)" class="fav-btn">
-												<i class="far fa-bookmark"></i>
-											</a>
+
 										</div>
 										<div class="pro-content">
 											<h3 class="title">
@@ -220,7 +210,10 @@
 													<a href="{{route('mentee.mentor_profile', $favorite['mentor']['id'])}}" class="btn view-btn">View Profile</a>
 												</div>
 												<div class="col-6">
-													<a href="#" class="btn book-btn"><i class="far fa-bookmark"></i></a>
+                                                    <form action="{{route('mentee.favourite.delete', $favorite['mentor']['id'])}}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="btn book-btn"><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
 												</div>
 											</div>
 										</div>

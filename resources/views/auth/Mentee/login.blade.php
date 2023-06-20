@@ -26,12 +26,20 @@
 		<div class="main-wrapper">
 
 
-			<!-- Page Content -->
+            <!-- Page Content -->
 			<div class="bg-pattern-style">
-				<div class="content">
+                <div class="content">
 
-					<!-- Login Tab Content -->
+                    <!-- Login Tab Content -->
 					<div class="account-content">
+                        @if (session()->has('message'))
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <strong>{{ session()->get('message') }}</strong>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                           @endif
 						<div class="account-box">
 							<div class="login-right">
 

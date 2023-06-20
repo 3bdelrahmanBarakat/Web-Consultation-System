@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime('start_at');
             $table->integer('duration')->comment('minutes');
             $table->string('password')->nullable()->comment('meeting password');
+            $table->string('topic');
             $table->text('start_url');
             $table->text('join_url');
             $table->foreign('mentor_id')->references('id')->on('mentors')->onDelete('cascade');

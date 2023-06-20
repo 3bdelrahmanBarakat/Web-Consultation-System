@@ -74,15 +74,7 @@
 						<ul class="main-nav">
 							<li class="has-submenu">
 								<a href="{{route('mentee.mentor_search')}}">Home </a>
-								<!-- <ul class="submenu">
-									<li><a href="index.html">Home</a></li>
-									<li><a href="index-two.html">Home 2</a></li>
-									<li><a href="index-three.html">Home 3</a></li>
-									<li><a href="index-four.html">Home 4</a></li>
-									<li><a href="index-five.html">Home 5</a></li>
-									<li><a href="index-six.html">Home 6</a></li>
-									<li><a href="index-seven.html">Home 7</a></li>
-								</ul> -->
+
 							</li>
 							<li class="has-submenu">
 								<a href="">Mentor <i class="fas fa-chevron-down"></i></a>
@@ -92,15 +84,7 @@
 									<li><a href="schedule-timings.html">Schedule Timing</a></li>
 									<li><a href="mentee-list.html">Mentee List</a></li>
 									<li><a href="profile-mentee.html">Mentee Profile</a></li>
-									<!-- <li class="has-submenu">
-										<a href="blog.html">Blog</a>
-										<ul class="submenu">
-											<li><a href="blog.html">Blog</a></li>
-											<li><a href="blog-details.html">Blog View</a></li>
-											<li><a href="add-blog.html">Add Blog</a></li>
-											<li><a href="edit-blog.html">Edit Blog</a></li>
-										</ul>
-									</li> -->
+
 									<li><a href="chat.html">Chat</a></li>
 									<li><a href="invoices.html">Invoices</a></li>
 									<li><a href="profile-settings.html">Profile Settings</a></li>
@@ -150,14 +134,7 @@
 									<li><a href="forgot-password.html">Forgot Password</a></li>
 								</ul>
 							</li>
-							<!-- <li class="has-submenu">
-								<a href="">Blog <i class="fas fa-chevron-down"></i></a>
-								<ul class="submenu">
-									<li><a href="blog-list.html">Blog List</a></li>
-									<li><a href="blog-grid.html">Blog Grid</a></li>
-									<li><a href="blog-details.html">Blog Details</a></li>
-								</ul>
-							</li> -->
+
 							<li>
 								<a href="admin/index.html" target="_blank">Admin</a>
 							</li>
@@ -231,6 +208,15 @@
 					<div class="row justify-content-center">
 						<div class="col-xl-10">
 
+                            @if (session()->has('message'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session()->get('message') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                                 @endif
+
 							<!-- Mentor Widget -->
 							<div class="card">
 								<div class="card-body">
@@ -251,7 +237,7 @@
 											</div>
 											<div class="user-info-cont">
 												<h4 class="usr-name">{{ $mentor->fname }} {{ $mentor->lname }}</h4>
-												<p class="mentor-type">English Literature (M.A)</p>
+												<p class="mentor-type">Backend developer</p>
 
                                                 <div class="mentor-action">
 													<p class="mentor-type social-title">Contact Me</p>
@@ -268,8 +254,15 @@
                                                     {{-- <button class="favorite-icon" data-mentor-id="{{ $mentor->id }}">Hello</button> --}}
 
                                                     <div id="bookmark-icon" class="btn-blue toggle-favorite" data-mentor-id="{{ $mentor->id }}">
+
+
                                                         <i class="favorite-icon far fa-bookmark"></i>
+
+
+
                                                         <i class="favorite-icon fas fa-bookmark"></i>
+
+
                                                       </div>
 
 													{{-- <div class="btn-blue toggle-favorite" data-mentor-id="{{ $mentor->id }}">
@@ -281,7 +274,6 @@
 										<div class="user-info-right d-flex align-items-end flex-wrap">
                                             <div class="hireme-btn text-center">
 
-                                                {{-- <span class="hire-rate">${{$mentor['plans'][0]->price}} / Month</span> --}}
 
                                                 <div class="rowplans">
 
@@ -541,13 +533,15 @@
 								<div class="card-body pb-1 custom-border-card">
 
 									<!-- Location Details -->
-									<div class="widget awards-widget m-0">
-										<h4 class="widget-title">Write a review about this mentor</h4>
-										<textarea name="" id="" cols="130" rows="10"></textarea>
+									<form action="{{route('mentee.mentor.add_review',$mentor['id'])}}" method="POST">
+                                        @csrf
+                                        <div class="widget awards-widget m-0">
+                                            <h4 class="widget-title">Write a review about this mentor</h4>
+                                            <textarea name="review" cols="130" rows="10"></textarea>
+                                            <button class="btn-primary rounded"> Submit </button>
 
-										<button class="subbut"> Submit </button>
-
-									</div>
+                                        </div>
+                                    </form>
 							<!-- /Mentor Details Tab -->
 
 						</div>

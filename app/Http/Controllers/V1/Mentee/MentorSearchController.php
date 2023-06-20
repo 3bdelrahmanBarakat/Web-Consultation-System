@@ -11,19 +11,21 @@ class MentorSearchController extends Controller
 {
     public function index(Request $request)
     {
-        $query = $request->input('query');
+        $searchTerm = $request->input('query');
     $results = DB::table('mentors')
-                    ->join('mentorsabout', 'mentors.id', '=', 'mentorsabout.mentor_id')
-                    ->join('experiences', 'mentors.id', '=', 'experiences.mentor_id')
-                    ->where('fname', 'LIKE', '%' . $query . '%')
-                    ->orWhere('lname', 'LIKE', '%' . $query . '%')
-                    ->orwhere('country', 'LIKE', '%' . $query . '%')
-                    ->orWhere('city', 'LIKE', '%' . $query . '%')
-                    ->orWhere('address', 'LIKE', '%' . $query . '%')
-                    ->orwhere('company_name', 'LIKE', '%' . $query . '%')
-                    ->get();
-
-            // dd($results);
-        return view('Mentee.Mentor_search.mentor_search')->with(['results'=> $results , 'query' => $query ]);
+    ->join('mentorsabout', 'mentors.id', '=', 'mentorsabout.mentor_id')
+    ->join('experiences', 'mentors.id', '=', 'experiences.mentor_id')
+    ->where(function ($query) use ($searchTerm) {
+        $query->where('fname', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('lname', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('country', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('city', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('address', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('company_name', 'LIKE', '%' . $searchTerm . '%');
+    })
+    ->where('status', 1)
+    ->get();
+    
+        return view('Mentee.Mentor_search.mentor_search')->with(['results'=> $results , 'query' => $searchTerm ]);
     }
 }

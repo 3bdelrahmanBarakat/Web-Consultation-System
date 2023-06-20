@@ -172,29 +172,29 @@
                                   <label for="standard-price" class="form-label">Price:</label>
                                   <div class="input-group">
                                     <span class="input-group-text">$</span>
-                                    <input type="number" name="standard_price" id="standard-price" class="form-control" step="0.01" required>
+                                    <input type="number" name="standard_price" id="standard-price" value="{{ old('standard_price') }}" class="form-control" step="0.01" required>
                                     <input type="hidden" name="standard_type" value="standard">
                                   </div>
                                 </div>
                                 <div class="mb-3">
                                   <label for="standard-sessions" class="form-label">Number of Sessions:</label>
-                                  <input type="number" name="standard_sessions" id="standard-sessions" class="form-control" required>
+                                  <input type="number" name="standard_sessions" id="standard-sessions" value="{{ old('standard_sessions') }}" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="per-session-chat" class="form-label">Answer via Chat:</label>
                                     <div class="form-check form-check-inline">
-                                      <input type="checkbox" name="standard_chat" id="per-session-chat-yes" class="form-check-input" value="1">
+                                      <input type="checkbox" name="standard_chat" id="per-session-chat-yes" value="{{ old('standard_chat') }}" class="form-check-input" value="1">
                                       <label for="per-session-chat-yes" class="form-check-label">Yes</label>
                                     </div>
 
                                   </div>
                                 <div class="mb-3">
                                   <label for="standard-response-time" class="form-label">Response Time (Days):</label>
-                                  <input type="number" name="standard_response_time" id="standard-response-time" class="form-control" required>
+                                  <input type="number" name="standard_response_time" id="standard-response-time" value="{{ old('standard_response_time') }}" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
                                   <label for="standard-description" class="form-label">Plan Description:</label>
-                                  <textarea name="standard_description" id="standard-description" class="form-control" rows="4" required></textarea>
+                                  <textarea name="standard_description" id="standard-description" value="{{ old('standard_description') }}" class="form-control" rows="4" required></textarea>
                                 </div>
                               </div>
                             </div>
@@ -208,29 +208,29 @@
                                   <label for="pro-price" class="form-label">Price:</label>
                                   <div class="input-group">
                                     <span class="input-group-text">$</span>
-                                    <input type="number" name="pro_price" id="pro-price" class="form-control" step="0.01" required>
+                                    <input type="number" name="pro_price" id="pro-price" value="{{ old('pro_price') }}" class="form-control" step="0.01" required>
                                     <input type="hidden" name="pro_type" value="pro">
                                   </div>
                                 </div>
                                 <div class="mb-3">
                                   <label for="pro-sessions" class="form-label">Number of Sessions:</label>
-                                  <input type="number" name="pro_sessions" id="pro-sessions" class="form-control" required>
+                                  <input type="number" name="pro_sessions" id="pro-sessions" value="{{ old('pro_sessions') }}" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="per-session-chat" class="form-label">Answer via Chat:</label>
                                     <div class="form-check form-check-inline">
-                                      <input type="checkbox" name="pro-chat" id="per-session-chat-yes" class="form-check-input"value="1">
+                                      <input type="checkbox" name="pro-chat" id="per-session-chat-yes" value="{{ old('pro-chat') }}" class="form-check-input"value="1">
                                       <label for="per_session_chat_yes" class="form-check-label">Yes</label>
                                     </div>
 
                                   </div>
                                 <div class="mb-3">
                                   <label for="pro-response-time" class="form-label">Response Time (Days):</label>
-                                  <input type="number" name="pro_response_time" id="pro-response-time" class="form-control" required>
+                                  <input type="number" name="pro_response_time" id="pro-response-time" value="{{ old('pro_response_time') }}" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
                                 <label for="pro-description" class="form-label">Plan Description:</label>
-                                <textarea name="pro_description" id="pro-description" class="form-control" rows="4" required></textarea>
+                                <textarea name="pro_description" id="pro-description" value="{{ old('pro-description') }}" class="form-control" rows="4" required></textarea>
                                 </div>
                                 </div>
                                 </div>
@@ -244,14 +244,14 @@
                                           <label for="per-session-price" class="form-label">Price:</label>
                                           <div class="input-group">
                                             <span class="input-group-text">$</span>
-                                            <input type="number" name="per_session_price" id="per-session-price" class="form-control" step="0.01" required>
+                                            <input type="number" name="per_session_price" id="per-session-price" value="{{ old('per-session-price') }}" class="form-control" step="0.01" required>
                                             <input type="hidden" name="per_session_type" value="per_session">
                                           </div>
                                         </div>
                                         <div class="mb-3">
                                           <label for="per-session-chat" class="form-label">Answer via Chat:</label>
                                           <div class="form-check form-check-inline">
-                                            <input type="checkbox" name="per_session_chat" id="per-session-chat-yes" class="form-check-input"value="1" >
+                                            <input type="checkbox" name="per_session_chat" id="per-session-chat-yes" value="{{ old('per_session_chat') }}" class="form-check-input"value="1" >
                                             <label for="per-session-chat-yes" class="form-check-label">Yes</label>
 
                                           </div>
@@ -260,7 +260,7 @@
 
                                         <div class="mb-3">
                                           <label for="per-session-description" class="form-label">Plan Description:</label>
-                                          <textarea name="per_session_description" id="per-session-description" class="form-control" rows="4" required></textarea>
+                                          <textarea name="per_session_description" id="per-session-description" value="{{ old('per-session-description') }}" class="form-control" rows="4" required></textarea>
                                         </div>
                                       </div>
                                     </div>

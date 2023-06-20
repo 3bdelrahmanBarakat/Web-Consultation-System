@@ -26,9 +26,17 @@
 		<div class="main-wrapper">
 
 
-			<!-- Page Content -->
+            <!-- Page Content -->
 			<div class="bg-pattern-style">
-				<div class="content">
+                <div class="content">
+                    @if (session()->has('active'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>{{ session()->get('active') }}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+                   @endif
 
 					<!-- Login Tab Content -->
 					<div class="account-content">

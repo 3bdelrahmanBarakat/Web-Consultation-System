@@ -33,7 +33,7 @@ class MentorChatController extends Controller
         ->where('mentor_id', auth()->user()->id)
         ->distinct()
         ->get();
-        // return $messages;
+
         return view('Chat.mentor-chat')->with([
             'messages'=> $messages,
             'mentee_id'=>$id,
@@ -46,7 +46,7 @@ class MentorChatController extends Controller
 
     public function store(Request $request)
     {
-        
+
         Message::create([
             'mentee_id' => $request->mentee_id,
             'mentor_id' => auth()->user()->id,

@@ -28,6 +28,7 @@ class Mentee extends Authenticatable
         'username',
         'email',
         'password',
+        'is_activated'
     ];
 
     /**
@@ -62,6 +63,10 @@ class Mentee extends Authenticatable
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 
 }

@@ -69,4 +69,9 @@ class MenteeProfileController extends Controller
             'favorites' => $favorites,
         ]);
     }
+    public function deleteFavourite($id)
+    {
+        Favorite::where('mentor_id', $id)->delete();
+        return back();
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Models\Booking;
 
 use App\Models\Mentee\Mentee;
+use App\Models\Mentor\Mentor;
 use App\Models\Mentor\Schedule_Timings\ScheduleTiming;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->boolean('status')->default(false);
+            $table->boolean('is_activated')->default(false);
             $table->string('password');
             $table->rememberToken();
             $table->softDeletes();

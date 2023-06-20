@@ -3,7 +3,7 @@
 	<head>
 
 		<meta charset="utf-8">
-		<title>Mentoring</title>
+		<title>MentorQuest - Dashboard</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
 		<!-- Favicon -->
@@ -221,13 +221,17 @@
 										{{-- <p class="mentor-type">English Literature (M.A)</p> --}}
 									</div>
 								</div>
+                                @if (auth::user()->status == 0)
+
 								<div class="progress-bar-custom">
-									<h6>Complete your profiles ></h6>
+									<a href="{{route('mentor.payment.setup')}}"><h6>Complete your profiles ></h6></a>
+                                    <span>To appear for mentees </span>
 									<div class="pro-progress">
 										<div class="tooltip-toggle" tabindex="0"></div>
 										<div class="tooltip">80%</div>
 									</div>
 								</div>
+                                @endif
 								<div class="custom-sidebar-nav">
 									<ul>
 										<li><a href="{{route('home')}}" class="active"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
@@ -235,9 +239,7 @@
 										<li><a href="{{route('schedule-timings.index')}}"><i class="fas fa-hourglass-start"></i>Schedule Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="#"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('mentor.chat.show')}}"><i class="fas fa-comments"></i>Messages <span><i class="fas fa-chevron-right"></i></span></a></li>
-										{{-- <li><a href="invoices.html"><i class="fas fa-file-invoice"></i>Invoices <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="reviews.html"><i class="fas fa-eye"></i>Reviews <span><i class="fas fa-chevron-right"></i></span></a></li> --}}
-										<!-- <li><a href="blog.html"><i class="fab fa-blogger-b"></i>Blog <span><i class="fas fa-chevron-right"></i></span></a></li> -->
+										<li><a href="{{route('mentor.reviews')}}"><i class="fas fa-eye"></i>Reviews <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('profile-settings.edit')}}"><i class="fas fa-user-cog"></i>Profile <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li>
                                             <form  action="{{ route('logout') }}" method="POST">

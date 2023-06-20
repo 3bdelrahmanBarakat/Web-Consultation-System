@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Mentor\Profile\AboutMiddleware;
 use App\Http\Middleware\Mentor\Profile\ExperienceMiddleware;
+use App\Http\Middleware\Mentor\Profile\PaymentMiddleware;
 use App\Http\Middleware\Mentor\Profile\PlanMiddleware;
 use App\Http\Middleware\Mentor\Profile\ProfileMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -72,5 +73,6 @@ class Kernel extends HttpKernel
         'profile.experience' => ExperienceMiddleware::class,
         'profile.plan' => PlanMiddleware::class,
         'profile' => ProfileMiddleware::class,
+        'payment' => PaymentMiddleware::class,
     ];
 }

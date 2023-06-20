@@ -37,13 +37,13 @@
 								<span></span>
 							</span>
 						</a>
-						<a href="index.html" class="navbar-brand logo">
+						<a href="{{route('home')}}" class="navbar-brand logo">
 							<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
-							<a href="index.html" class="menu-logo">
+							<a href="{{route('home')}}" class="menu-logo">
 								<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -52,7 +52,7 @@
 						</div>
 						<ul class="main-nav">
 							<li class="has-submenu">
-								<a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
+								<a href="{{route('home')}}">Home <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
 									<li><a href="index.html">Home</a></li>
 									<li><a href="index-two.html">Home 2</a></li>
@@ -218,16 +218,20 @@
 									</div>
 									<div class="user-info-cont">
 										<h4 class="usr-name">{{ Auth::user()->fname }}</h4>
-										<p class="mentor-type">English Literature (M.A)</p>
+										{{-- <p class="mentor-type">English Literature (M.A)</p> --}}
 									</div>
 								</div>
+                                @if (auth::user()->status == 0)
+
 								<div class="progress-bar-custom">
-									<h6>Complete your profiles ></h6>
+									<a href="{{route('mentor.payment.setup')}}"><h6>Complete your profiles ></h6></a>
+                                    <span>To appear for mentees </span>
 									<div class="pro-progress">
-									  <div class="tooltip-toggle" tabindex="0"></div>
-									   <div class="tooltip">80%</div>
+										<div class="tooltip-toggle" tabindex="0"></div>
+										<div class="tooltip">80%</div>
 									</div>
 								</div>
+                                @endif
 								<div class="custom-sidebar-nav">
 									<ul>
 										<li><a href="{{route('home')}}" class="active"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
@@ -272,8 +276,8 @@
 													<tr>
 														<th>Mentee</th>
 														<th>Meeting Date</th>
-														<th class="text-center">Meeting Time</th>
-														<th class="text-center">Meeting Link</th>
+														<th class="text-center">Start Url</th>
+														<th class="text-center">Join Url</th>
 														<th class="text-center">Actions</th>
 													</tr>
 												</thead>
@@ -283,12 +287,12 @@
 														<td>
 															<h2 class="table-avatar">
 																<a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="{{asset('assets/img/user/user2.jpg')}}" alt="User Image"></a>
-																<a href="profile.html">Mohamed<span>mohamed@gmail.com</span></a>
+																<a href="profile.html">{{$meeting['mentee']['name']}}<span>{{$meeting['mentee']['email']}}</span></a>
 															</h2>
 														</td>
-														<td>08 April 2020</td>
-														<td class="text-center"><span class="pending">9:00 AM</span></td>
-														<td class="text-center"><span class="pending"><a href="">https://zoom.us/start?key=5521</a></span></td>
+														<td class="text-center" ><span>{{$meeting['start_at']}}</span></td>
+														<td class="text-center"><span class="pending"><a href="{{$meeting['start_url']}}">Start Url</a></span></td>
+														<td class="text-center"><span class="pending"><a href="{{$meeting['join_url']}}">Join Url</a></span></td>
 														<td class="text-center"><a href="profile-mentee.html" class="btn btn-sm bg-danger"><i class="fas fa-trash" style="color: #ffffff;"></i></a></td>
 													</tr>
                                                     @endforeach
@@ -491,7 +495,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label>Meeting Password: <span class="text-danger">*</span></label>
-                                    <input class="form-control" name="password" type="text">
+                                    <input class="form-control" name="password" type="password">
                                 </div>
                             </div>
 

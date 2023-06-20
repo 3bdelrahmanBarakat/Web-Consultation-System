@@ -10,6 +10,7 @@ use App\Models\Mentor\Profile\Experience;
 use App\Models\Mentor\Profile\MentorAbout;
 use App\Models\Mentor\Profile\Plan;
 use App\Models\Mentor\Schedule_Timings\ScheduleTiming;
+use App\Models\Review\Review;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,7 +32,8 @@ class Mentor extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'phone',
-        'user_status',
+        'status',
+        'is_activated',
     ];
 
     /**
@@ -83,6 +85,10 @@ class Mentor extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Message::class);
     }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 
-    
+
 }

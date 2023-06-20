@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'mentees',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'mentees' => [
             'driver' => 'eloquent',
             'model' => App\Models\Mentee\Mentee::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin\Admin::class,
         ],
 
         // 'users' => [
@@ -101,6 +109,18 @@ return [
     'passwords' => [
         'mentors' => [
             'provider' => 'mentors',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'mentees' => [
+            'provider' => 'mentees',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

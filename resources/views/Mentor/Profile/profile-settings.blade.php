@@ -229,13 +229,17 @@
 										{{-- <p class="mentor-type">English Literature (M.A)</p> --}}
 									</div>
 								</div>
+                                @if (auth::user()->status == 0)
+
 								<div class="progress-bar-custom">
-									<h6>Complete your profiles ></h6>
+									<a href="{{route('mentor.payment.setup')}}"><h6>Complete your profiles ></h6></a>
+                                    <span>To appear for mentees </span>
 									<div class="pro-progress">
 										<div class="tooltip-toggle" tabindex="0"></div>
 										<div class="tooltip">80%</div>
 									</div>
 								</div>
+                                @endif
 								<div class="custom-sidebar-nav">
 									<ul>
 										<li><a href="{{route('home')}}" class="active"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
@@ -461,7 +465,9 @@
 												</div>
 											</div> --}}
 										</div>
+                                        <a href="{{route('mentor.reset-password')}}">Change Password</a> <br><br>
 										<div class="submit-section">
+
 											<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
 										</div>
 									</form>

@@ -26,7 +26,8 @@ class PlanController extends Controller
         'is_chat_allowed' => $request->standard_chat,
         'response_time' => $request->standard_response_time,
         'description' => $request->standard_description,
-        ]);
+        ]
+    );
 
         Plan::create([
             'mentor_id' => Auth::user()->id,
@@ -46,6 +47,11 @@ class PlanController extends Controller
             'description' => $request->per_session_description,
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('review-account');
+    }
+
+    public function reviewAccount()
+    {
+        return view('Mentor.Profile.account-review');
     }
 }

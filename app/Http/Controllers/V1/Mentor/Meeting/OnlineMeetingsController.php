@@ -3,20 +3,25 @@
 namespace App\Http\Controllers\V1\Mentor\Meeting;
 
 use App\Http\Controllers\Controller;
-use App\Http\Traits\MeetingZoomTrait;
+use MacsiDigital\Zoom\Facades\Zoom;
+use App\Models\ZoomMeeting;
+use App\Http\Requests\API\V1\Mentor\Meetings\StoreMeetRequest;
+use App\Http\Requests\V1\Mentor\Meeting\OnlineMeetingRequest;
 use App\Models\Booking\Booking;
 use App\Models\Meeting\Meeting;
 use App\Models\Mentor\Profile\MentorAbout;
-use Exception;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use MacsiDigital\Zoom\Facades\Zoom;
+use Illuminate\Support\Facades\Http;
 
-class OnlineMeetingsController extends Controller
+class OnlineMeetingsController  extends Controller
 {
-    use MeetingZoomTrait;
+
+
 
     public function index()
     {
+
         $meetings = Meeting::with('mentee')->where('mentor_id', auth()->user()->id)->get();
         $mentees = Booking::with('mentee')->where('mentor_id', auth()->user()->id)->distinct()->get("mentee_id","mentee");
         $about = MentorAbout::where('mentor_id', auth()->user()->id)->first();
@@ -27,93 +32,50 @@ class OnlineMeetingsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(OnlineMeetingRequest $request)
     {
-        // return $request;
-        // $meeting = $this->createMeeting($request);
 
-        $user = auth()->user();
+            $meet_data = [
+                'topic' => "new topic",
+                'start_time' => $request->start_time,
+                'duration' => $request->duration,
+                'password' => $request->password,
+                'time_zone' => "Africa/Cairo",
+            ];
 
-    // Create a new Zoom meeting
-    $meeting = Zoom::user($user->id)->meetings()->make([
-        'topic' => 'New Meeting',
-        'start_time' => $request->start_time,
-        'duration' => $request->duration,
-            'password' => $request->password,
-            'timezone' => 'Africa/Cairo'
-        // Other meeting parameters
-    ]);
+            $meeting = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $this->generateJWT(),
+                'Content-Type' => 'application/json',
+            ])->post('https://api.zoom.us/v2/users/me/meetings', $meet_data)->json();
 
-    // Save the meeting
-    $meeting->save();
+             Meeting::create([
+                'mentor_id' => auth()->user()->id,
+                'mentee_id' => $request->mentee_id,
+                // 'booking_id' => $request->validated('booking_id'),
 
+                'meeting_id' => $meeting['id'],
+                'topic' => $meeting['topic'],
+                'start_at' => Carbon::parse($meeting['start_time']),
+                'duration' => $meeting['duration'],
+                'password' => $meeting['password'],
+                'start_url' => $meeting['start_url'],
+                'join_url' => $meeting['join_url'],
+            ]);
 
+            return back()->with('success', 'Zoom Meeting has been created successfully');
 
-    // Access the meeting details
-    $meetingId = $meeting->id;
-    $startUrl = $meeting->start_url;
-    $joinUrl = $meeting->join_url;
-    $password = $meeting->password;
-    $duration = $meeting->duration;
+    }
 
-    Meeting::create([
-        'mentor_id' => auth()->user()->id,
-        'mentee_id' => $meetingId,
-        'meeting_id' => $meeting->id,
-        'start_at' => $request->start_time,
-        'duration' => $duration,
-        'password' => $password,
-        'start_url' => $startUrl,
-        'join_url' => $joinUrl,
-    ]);
+    protected function generateJWT()
+    {
+        $key = config('zoom.api_key');
+        $secret = config('zoom.api_secret');
 
-    return back()->with('success', 'Zoom Meeting has been created successfully');
+        $payload = [
+            'iss' => $key,
+            'exp' => time() + 60,
+        ];
 
-
-
-        //     $user = Zoom::user(auth()->user()->id)->first();
-
-        //     // if ($user !== null) {
-        //     //     foreach ($user as $item) {
-        //     //         dd($item) ;
-        //     //     }
-        //     // }
-
-
-        // $meetingData = [
-        //     'topic' => "new meeting",
-        //     'duration' => $request->duration,
-        //     'password' => $request->password,
-        //     'start_time' => $request->start_time,
-        //     'timezone' => config('zoom.timezone')
-        //   // 'timezone' => 'Africa/Cairo'
-        // ];
-        // $meeting = Zoom::meeting()->make($meetingData);
-
-        // $meeting->settings()->make([
-        //     'join_before_host' => false,
-        //     'host_video' => false,
-        //     'participant_video' => false,
-        //     'mute_upon_entry' => true,
-        //     'waiting_room' => true,
-        //     'approval_type' => config('zoom.approval_type'),
-        //     'audio' => config('zoom.audio'),
-        //     'auto_recording' => config('zoom.auto_recording')
-        // ]);
-
-        //  $user->meetings()->save($meeting);
-
-        // Meeting::create([
-        //     'mentor_id' => auth()->user()->id,
-        //     'mentee_id' => $request->mentee_id,
-        //     'meeting_id' => $meeting->id,
-        //     'start_at' => $request->start_time,
-        //     'duration' => $meeting->duration,
-        //     'password' => $meeting->password,
-        //     'start_url' => $meeting->start_url,
-        //     'join_url' => $meeting->join_url,
-        // ]);
-
-        // return back()->with('success', 'Zoom Meeting has been created successfully');
+        return \Firebase\JWT\JWT::encode($payload, $secret, 'HS256');
     }
 }

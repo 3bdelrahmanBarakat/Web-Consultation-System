@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Mentor\Profile;
 
+use App\Models\Mentor\Mentor;
 use App\Models\Mentor\Profile\Experience;
 use App\Models\Mentor\Profile\MentorAbout;
 use App\Models\Mentor\Profile\Plan;
@@ -22,7 +23,7 @@ class ProfileMiddleware
         $about_exists = MentorAbout::where('mentor_id', Auth::user()->id)->first();
         $experience_exists = Experience::where('mentor_id', Auth::user()->id)->first();
         $plan_exists = Plan::where('mentor_id', Auth::user()->id)->first();
-
+        $is_activated = Mentor::where('id', Auth::user()->id)->value('is_activated');
         if(!$about_exists)
         {
             return redirect()->route('about');
@@ -36,6 +37,11 @@ class ProfileMiddleware
         elseif(!$plan_exists)
         {
             return redirect()->route('plan');
+        }
+
+        elseif($is_activated === 0)
+        {
+            return redirect()->route('review-account');
         }
 
         return $next($request);
