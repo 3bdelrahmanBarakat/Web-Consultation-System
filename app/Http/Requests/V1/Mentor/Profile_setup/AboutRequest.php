@@ -26,6 +26,8 @@ class AboutRequest extends FormRequest
             'date_of_birth' => 'required',
             'mentor_id' => 'required',
             'address' => 'required|string|min:6|max:255',
+            'bio' => 'required|string|min:6|max:255',
+            'job_title' => 'required|string|min:6|max:255',
             'country' => 'required|string',
             'city' => 'required|string',
             'zip_code' => 'required',

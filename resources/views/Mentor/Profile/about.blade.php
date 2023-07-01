@@ -107,10 +107,25 @@
 												<input type="text" name="city" class="form-control" value="Newyork">
 											</div>
 										</div>
-										<div class="col-12 col-md-6">
+										<div class="col-12 col-md-12">
 											<div class="form-group">
 												<label>Zip Code</label>
 												<input type="text" name="zip_code" class="form-control" value="13420">
+											</div>
+										</div>
+
+										<div class="col-12 col-md-12">
+											<div class="form-group">
+												<label>Job title</label>
+												<input type="text" name="job_title" class="form-control" value="backend developer">
+											</div>
+										</div>
+
+										<div class="col-12 col-md-12">
+											<div class="form-group">
+												<label>Bio</label>
+
+                                                <textarea name="bio" cols="60" rows="5"></textarea>
 											</div>
 										</div>
 

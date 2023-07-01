@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('mentor_id');
             $table->unsignedBigInteger('mentee_id');
+            $table->unsignedBigInteger('booking_id')->nullable();
             $table->string('meeting_id');
             $table->dateTime('start_at');
             $table->integer('duration')->comment('minutes');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->text('join_url');
             $table->foreign('mentor_id')->references('id')->on('mentors')->onDelete('cascade');
             $table->foreign('mentee_id')->references('id')->on('mentees')->onDelete('cascade');
+            $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
             $table->timestamps();
         });
     }

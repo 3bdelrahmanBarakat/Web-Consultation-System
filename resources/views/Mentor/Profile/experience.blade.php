@@ -35,7 +35,7 @@
 								<div class="login-header">
 									<h3><span>MentorQuest</span> <span style="color: grey;"> || </span> Profile setup</h3>
                                     <br>
-                                    <h5>Step 2 - Experience</h5>
+                                    <h5>Step 2 - Experience (Current job)</h5>
 								</div>
 
                                 @if($errors->any())

@@ -43,7 +43,7 @@
 								<span></span>
 							</span>
 						</a>
-						<a href="{{route('mentee.dashboard')}}" class="navbar-brand logo">
+						<a href="/" class="navbar-brand logo">
 							<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" class="img-fluid" alt="Logo">
 						</a>
 					</div>
@@ -91,7 +91,7 @@
 						</ul>
 					</div>
 					<ul class="nav header-navbar-rht">
-
+                        @if (auth()->guard('mentee')->check())
 						<!-- User Menu -->
 						<li class="nav-item dropdown has-arrow logged-item">
 							<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
@@ -105,7 +105,7 @@
 										<img src="{{asset('assets/img/user/user.jpg')}}" alt="User Image" class="avatar-img rounded-circle">
 									</div>
 									<div class="user-text">
-										<h6>{{ Auth::user()->name }}</h6>
+										<h6>{{ auth()->guard('mentee')->user()->name }}</h6>
 										<p class="text-muted mb-0">Mentee</p>
 									</div>
 
@@ -128,6 +128,24 @@
 							</div>
 						</li>
 						<!-- /User Menu -->
+                        @elseif (auth()->guard('web')->check())
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('home')}}">Dashboard</a>
+                            <form  action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
+                        @else
+                        <!-- Display login and register buttons for unauthenticated users -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link header-login" href="{{ route('register') }}">Register</a>
+                            </li>
+                        @endif
 
 					</ul>
 				</nav>

@@ -3,7 +3,7 @@
 	<head>
 
 		<meta charset="utf-8">
-		<title>Mentoring</title>
+		<title>MentorQuest - Profile</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
 		<!-- Favicon -->
@@ -210,7 +210,7 @@
 									<div class="mentor-widget">
 										<div class="user-info-left align-items-center">
 											<div class="mentor-img d-flex flex-wrap justify-content-center">
-												<div class="pro-avatar">JD</div>
+												<div class="pro-avatar">A</div>
 												<div class="rating text-center">
 													<i class="fas fa-star filled"></i>
 													<i class="fas fa-star filled"></i>
@@ -224,7 +224,7 @@
 											</div>
 											<div class="user-info-cont">
 												<h4 class="usr-name">{{ Auth::user()->fname }} {{ Auth::user()->lname }}</h4>
-												<p class="mentor-type">English Literature (M.A)</p>
+												<p class="mentor-type">{{$about['job_title']}}</p>
 
 											</div>
 										</div>
@@ -247,8 +247,7 @@
 									<div class="widget about-widget custom-about mb-0">
 										<h4 class="widget-title">About Me</h4>
 										<hr/>
-										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-										<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+										<p>{{$about['bio']}}</p>
 									</div>
 									<!-- /About Details -->
 								</div>

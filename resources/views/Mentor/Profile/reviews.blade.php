@@ -219,9 +219,10 @@
 								<div class="custom-sidebar-nav">
 									<ul>
 										<li><a href="{{route('home')}}" class="active"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="{{route('appointments.index')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('bookings.index')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('schedule-timings.index')}}"><i class="fas fa-hourglass-start"></i>Schedule Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="#"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentor.appointments')}}"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
+                                        <li><a href="{{route('mentor.meetings')}}"><i class="fas fa-video"></i>Meetings <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('mentor.chat.show')}}"><i class="fas fa-comments"></i>Messages <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('mentor.reviews')}}"><i class="fas fa-eye"></i>Reviews <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('profile-settings.edit')}}"><i class="fas fa-user-cog"></i>Profile <span><i class="fas fa-chevron-right"></i></span></a></li>
@@ -302,7 +303,7 @@
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
 									<div class="footer-logo">
-										<img src="assets/img/logo final mohamed pnggggggg-01.png" alt="logo">
+										<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" alt="logo">
 									</div>
 									<div class="footer-about-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>

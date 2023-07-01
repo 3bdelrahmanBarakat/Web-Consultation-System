@@ -23,8 +23,6 @@ class OnlineMeetingRequest extends FormRequest
     {
         return [
             'start_time' => 'required',
-            'duration' => 'required',
-            'password' => 'required|min:6|max:20',
         ];
     }
 }

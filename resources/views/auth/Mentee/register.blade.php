@@ -56,7 +56,7 @@
                                                 @enderror
 											</div>
 										</div>
-										
+
 									</div>
 									<div class="form-group">
 										<label  class="form-control-label">Email Address</label>
@@ -102,13 +102,8 @@
 										</div>
 									</div>
 									<button class="btn btn-primary login-btn" type="submit">Create Account</button>
-									<div class="login-or">
-										<span class="or-line"></span>
-										<span class="span-or">or</span>
-									</div>
-									<div class="g-mail login">
-										<a href="https://accounts.google.com/v3/signin/identifier?dsh=S369556153%3A1677273061588148&continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&ifkv=AWnogHdFH7eWnGnNHIpPbnaUIZ55GlNLANk9cTEZvpeys5qSprzgD2ynMKYYx_Th3-L_NjW94vns0A" class="btn btn-google btn-block w-100"><i class="fab fa-google me-1"></i> Login</a>
-									</div>
+									
+
 									<div class="account-footer text-center mt-3">
 										Already have an account? <a style="color:#1169b1" class="forgot-link mb-0" href="{{ route('mentee.login') }}">Login</a>
 									</div>

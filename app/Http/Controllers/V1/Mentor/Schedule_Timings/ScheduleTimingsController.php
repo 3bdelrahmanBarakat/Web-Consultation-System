@@ -15,16 +15,12 @@ class ScheduleTimingsController extends Controller
 {
     public function index()
     {
-        // $results = DB::select('SELECT TIME_FORMAT(start_time, "%H") AS hours FROM schedule_timings');
-        // return $results;
-        // die;
-        $timings = ScheduleTiming::where('mentor_id', Auth::user()->id)->where('duration' , 'hour')->get();
-        $about = MentorAbout::where('mentor_id', Auth::user()->id)->first();
-        $experience = Experience::where('mentor_id', Auth::user()->id)->first();
+
+        $timings = ScheduleTiming::where('mentor_id', Auth::guard('web')->user()->id)->where('status' , 'pending')->get();
+        $about = MentorAbout::where('mentor_id', Auth::guard('web')->user()->id)->first();
         return view('Mentor.Schedule_timings.schedule_timings')->with(
             [
             'about' => $about,
-            'experience' => $experience,
             'timings' => $timings
             ]
         );
@@ -33,12 +29,12 @@ class ScheduleTimingsController extends Controller
     public function store(ScheduleTimingsRequest $request)
     {
 
-        $startTimeValue = $request->start_time;
-        $startTimeParts = explode(":", $startTimeValue);
-        $halfHourValue = $startTimeParts[0].":30";
+        // $startTimeValue = $request->start_time;
+        // $startTimeParts = explode(":", $startTimeValue);
+        // $halfHourValue = $startTimeParts[0].":30";
 
         ScheduleTiming::create([
-            'mentor_id' => Auth::user()->id,
+            'mentor_id' => Auth::guard('web')->user()->id,
             'status' => 'pending',
             'day' => $request->day,
             'start_time' => $request->start_time,
@@ -46,23 +42,23 @@ class ScheduleTimingsController extends Controller
             'duration' => 'hour'
         ]);
 
-        ScheduleTiming::create([
-            'mentor_id' => Auth::user()->id,
-            'status' => 'pending',
-            'day' => $request->day,
-            'start_time' => $request->start_time,
-            'end_time' => $halfHourValue,
-            'duration' => 'half'
-        ]);
+        // ScheduleTiming::create([
+        //     'mentor_id' => Auth::user()->id,
+        //     'status' => 'pending',
+        //     'day' => $request->day,
+        //     'start_time' => $request->start_time,
+        //     'end_time' => $halfHourValue,
+        //     'duration' => 'half'
+        // ]);
 
-        ScheduleTiming::create([
-            'mentor_id' => Auth::user()->id,
-            'status' => 'pending',
-            'day' => $request->day,
-            'start_time' => $halfHourValue,
-            'end_time' => $request->end_time,
-            'duration' => 'half'
-        ]);
+        // ScheduleTiming::create([
+        //     'mentor_id' => Auth::user()->id,
+        //     'status' => 'pending',
+        //     'day' => $request->day,
+        //     'start_time' => $halfHourValue,
+        //     'end_time' => $request->end_time,
+        //     'duration' => 'half'
+        // ]);
 
         return back()->with('Add', 'The Schedule Timing has been created successfully');
     }

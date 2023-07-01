@@ -74,5 +74,7 @@ class Kernel extends HttpKernel
         'profile.plan' => PlanMiddleware::class,
         'profile' => ProfileMiddleware::class,
         'payment' => PaymentMiddleware::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+
     ];
 }

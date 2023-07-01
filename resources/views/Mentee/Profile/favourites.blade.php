@@ -62,7 +62,7 @@
 
 							</li>
 							<li class="has-submenu">
-								<a href="">Bookings</a>
+								<a href="{{route('mentee.bookings')}}">Bookings</a>
 
 							</li>
 							<li class="has-submenu active">
@@ -91,11 +91,14 @@
 										<img src="{{asset('assets/img/user/user.jpg')}}" alt="User Image" class="avatar-img rounded-circle">
 									</div>
 									<div class="user-text">
-										<h6>Jonathan Doe</h6>
-										<p class="text-muted mb-0">Mentor</p>
+										<h6>{{ Auth::user()->name }}</h6>
+										<p class="text-muted mb-0">Mentee</p>
 									</div>
 								</div>
-								<a class="dropdown-item" href="dashboard.html">Dashboard</a>
+								<a class="dropdown-item" href="{{route('mentee.bookings')}}">Bookings</a>
+								<a class="dropdown-item" href="{{route('mentee.meetings')}}">Meetings</a>
+
+								<a class="dropdown-item" href="{{route('mentee.favourites')}}">favourites</a>
 								<a class="dropdown-item" href="{{route('mentee.profile-settings')}}">Profile Settings</a>
 								<form  action="{{ route('mentee.logout') }}" method="POST">
                                     @csrf
@@ -149,7 +152,7 @@
 									<div class="pro-avatar">A</div>
 
 									<div class="user-info-cont">
-										<h4 class="usr-name">abdelrahman</h4>
+										<h4 class="usr-name">{{ Auth::user()->name }}</h4>
 
 									</div>
 								</div>
@@ -157,10 +160,17 @@
 								<div class="custom-sidebar-nav">
 									<ul>
 
-										<li><a href="bookings.html"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="chat.html"><i class="fas fa-comments"></i> Applications <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="profile.html"><i class="fas fa-user-cog"></i> Favourites <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="login.html"><i class="fas fa-sign-out-alt"></i>Logout <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentee.bookings')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentee.meetings')}}"><i class="fas fa-video"></i> Meetings <span><i class="fas fa-chevron-right"></i></span></a></li>
+                                        <li><a href="{{route('mentee.chat.show')}}"><i class="fas fa-comments"></i> Messages <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentee.favourites')}}"><i class="fas fa-user-cog"></i> Favourites <span><i class="fas fa-chevron-right"></i></span></a></li>
+                                        <li>
+                                            <form  action="{{ route('mentee.logout') }}" method="POST">
+                                            @csrf
+                                             <button style="background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"  href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                                             <span style="float: right"><i class="fas fa-chevron-right"></i></span>
+                                             </form>
+                                        </li>
 									</ul>
 								</div>
 							</div>
@@ -198,9 +208,7 @@
 												<li>
 													<i class="fas fa-map-marker-alt"></i> {{$favorite['mentor']['about']['city']}}, {{$favorite['mentor']['about']['country']}}
 												</li>
-												<li>
-													<i class="far fa-clock"></i> Available on Sat, 25 April
-												</li>
+												
 												<li>
 													<i class="far fa-money-bill-alt"></i> ${{$favorite['mentor']['plans'][2]['price']}} - ${{$favorite['mentor']['plans'][1]['price']}}<i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
 												</li>
@@ -267,7 +275,7 @@
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
 									<div class="footer-logo">
-										<img src="assets/img/logo.png" alt="logo">
+										<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" alt="logo">
 									</div>
 									<div class="footer-about-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -305,7 +313,7 @@
 										<li><a href="search.html">Search Mentors</a></li>
 										<li><a href="login.html">Login</a></li>
 										<li><a href="register.html">Register</a></li>
-										<li><a href="booking.html">Booking</a></li>
+										<li><a href="{{route('mentee.bookings')}}">Booking</a></li>
 										<li><a href="dashboard-mentee.html">Mentee Dashboard</a></li>
 									</ul>
 								</div>

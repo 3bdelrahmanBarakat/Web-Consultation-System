@@ -19,7 +19,7 @@ class PlanController extends Controller
     {
 
         Plan::create([
-        'mentor_id' => Auth::user()->id,
+        'mentor_id' => Auth::guard('web')->user()->id,
         'price' => $request->standard_price,
         'plan_type' => $request->standard_type,
         'number_of_sessions' => $request->standard_sessions,
@@ -30,7 +30,7 @@ class PlanController extends Controller
     );
 
         Plan::create([
-            'mentor_id' => Auth::user()->id,
+            'mentor_id' => Auth::guard('web')->user()->id,
             'price' => $request->pro_price,
             'plan_type' => $request->pro_type,
             'number_of_sessions' => $request->pro_sessions,
@@ -40,7 +40,7 @@ class PlanController extends Controller
         ]);
 
         Plan::create([
-            'mentor_id' => Auth::user()->id,
+            'mentor_id' => Auth::guard('web')->user()->id,
             'price' => $request->per_session_price,
             'plan_type' => $request->per_session_type,
             'is_chat_allowed' => $request->per_session_chat,

@@ -235,9 +235,10 @@
 								<div class="custom-sidebar-nav">
 									<ul>
 										<li><a href="{{route('home')}}" class="active"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="{{route('appointments.index')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('bookings.index')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('schedule-timings.index')}}"><i class="fas fa-hourglass-start"></i>Schedule Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="#"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentor.appointments')}}"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
+                                        <li><a href="{{route('mentor.meetings')}}"><i class="fas fa-video"></i>Meetings <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('mentor.chat.show')}}"><i class="fas fa-comments"></i>Messages <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('mentor.reviews')}}"><i class="fas fa-eye"></i>Reviews <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('profile-settings.edit')}}"><i class="fas fa-user-cog"></i>Profile <span><i class="fas fa-chevron-right"></i></span></a></li>
@@ -266,7 +267,7 @@
 											</div>
 										</div>
 										<div class="dash-widget-info">
-											<h3>0</h3>
+											<h3>{{$mentees_count}}</h3>
 											<h6>Members</h6>
 										</div>
 									</div>
@@ -280,7 +281,7 @@
 											</div>
 										</div>
 										<div class="dash-widget-info">
-											<h3>0</h3>
+											<h3>{{$bookings_count}}</h3>
 											<h6>Appointments</h6>
 										</div>
 									</div>
@@ -294,7 +295,7 @@
 											</div>
 										</div>
 										<div class="dash-widget-info">
-											<h3>$0</h3>
+											<h3>${{$total_earning}}</h3>
 											<h6>Total Earned</h6>
 										</div>
 									</div>
@@ -311,89 +312,26 @@
 													<thead>
 														<tr>
 															<th>BASIC INFO</th>
+															<th class="text-center">USERNAME</th>
 															<th>CREATED DATE</th>
-															<th class="text-center">TAGS</th>
 															<th class="text-center">ACTION</th>
 														</tr>
 													</thead>
 													<tbody>
-														<tr>
+														@foreach ($mentees_list as $mentee)
+                                                        <tr>
 															<td>
 																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user2.jpg" alt="User Image"></a>
-																	<a href="profile.html">Tyrone Roberts<span>tyroneroberts@adobe.com</span></a>
+																	<a href="#" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user2.jpg" alt="User Image"></a>
+																	<a href="#">{{$mentee['mentee']['name']}}<span>{{$mentee['mentee']['email']}}</span></a>
 																</h2>
 															</td>
-															<td>08 April 2020</td>
-															<td class="text-center"><span class="pending">PENDING</span></td>
-															<td class="text-center"><a href="profile.html" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
+															<td class="text-center">{{$mentee['mentee']['username']}}</td>
+															<td>{{$mentee['mentee']['created_at']}}</td>
+															<td class="text-center"><a href="#" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
 														</tr>
-														{{-- <tr>
-															<td>
-																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user1.jpg" alt="User Image"></a>
-																	<a href="profile.html">Julie Pennington <span>julie@adobe.com</span></a>
-																</h2>
-															</td>
-															<td>08 April 2020</td>
-															<td class="text-center"><span class="pending">PENDING</span></td>
-															<td class="text-center"><a href="profile.html" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
-														</tr>
-														<tr>
-															<td>
-																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user3.jpg" alt="User Image"></a>
-																	<a href="profile.html">Allen Davis <span>allendavis@adobe.com</span></a>
-																</h2>
-															</td>
-															<td>08 April 2020</td>
-															<td class="text-center"><span class="pending">PENDING</span></td>
-															<td class="text-center"><a href="profile.html" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
-														</tr>
-														<tr>
-															<td>
-																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user4.jpg" alt="User Image"></a>
-																	<a href="profile.html">Patricia Manzi <span>patriciamanzi@adobe.com</span></a>
-																</h2>
-															</td>
-															<td>08 April 2020</td>
-															<td class="text-center"><span class="accept">ACCEPTED</span></td>
-															<td class="text-center"><a href="profile.html" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
-														</tr>
-														<tr>
-															<td>
-																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user5.jpg" alt="User Image"></a>
-																	<a href="profile.html">Olive Lawrence <span>olivelawrence@adobe.com</span></a>
-																</h2>
-															</td>
-															<td>08 April 2020</td>
-															<td class="text-center"><span class="accept">ACCEPTED</span></td>
-															<td class="text-center"><a href="profile.html" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
-														</tr>
-														<tr>
-															<td>
-																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user6.jpg" alt="User Image"></a>
-																	<a href="profile.html">Frances Foster <span>frances@adobe.com</span></a>
-																</h2>
-															</td>
-															<td>08 April 2020</td>
-															<td class="text-center"><span class="accept">ACCEPTED</span></td>
-															<td class="text-center"><a href="profile.html" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
-														</tr>
-														<tr>
-															<td>
-																<h2 class="table-avatar">
-																	<a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user7.jpg" alt="User Image"></a>
-																	<a href="profile.html">Deloris Briscoe <span>delorisbriscoe@adobe.com</span></a>
-																</h2>
-															</td>
-															<td>08 April 2020</td>
-															<td class="text-center"><span class="reject">REJECTED</span></td>
-															<td class="text-center"><a href="profile.html" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
-														</tr> --}}
+                                                        @endforeach
+
 													</tbody>
 												</table>
 											</div>

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Mail\AcceptanceEmail;
 use App\Mail\RejectionEmail;
 use App\Models\Mentor\Mentor;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class MentoringApplicantsController extends Controller
@@ -21,6 +20,7 @@ class MentoringApplicantsController extends Controller
     {
         $mentor = Mentor::find($id);
         $mentor->status = 1;
+        $mentor->is_activated = 1;
         $mentor->save();
 
         Mail::to($mentor->email)->send(new AcceptanceEmail($mentor));

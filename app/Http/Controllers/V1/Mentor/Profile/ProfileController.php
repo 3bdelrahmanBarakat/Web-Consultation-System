@@ -15,8 +15,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $about = MentorAbout::where('mentor_id', Auth::user()->id)->first();
-        $experience = Experience::where('mentor_id', Auth::user()->id)->first();
+        $about = MentorAbout::where('mentor_id', Auth::guard('web')->user()->id)->first();
+        $experience = Experience::where('mentor_id', Auth::guard('web')->user()->id)->first();
 
         return view('Mentor.Profile.profile')->with(
             [
@@ -27,7 +27,7 @@ class ProfileController extends Controller
 
     public function resetPassword()
     {
-        $about = MentorAbout::where('mentor_id', auth()->user()->id)->first();
+        $about = MentorAbout::where('mentor_id', auth()->guard('web')->user()->id)->first();
         return view('Mentor.Profile.reset-password')->with([
             'about' => $about
         ]);
@@ -44,7 +44,7 @@ class ProfileController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('web')->user();
 
         if (!Hash::check($request->old_password, $user->password)) {
             $validator->errors()->add('old_password', 'The old password is incorrect.');
@@ -59,8 +59,8 @@ class ProfileController extends Controller
 
     public function showReviews()
     {
-        $mentor = auth()->user();
-        $about = MentorAbout::where('mentor_id', Auth::user()->id)->first();
+        $mentor = auth()->guard('web')->user();
+        $about = MentorAbout::where('mentor_id', $mentor->id)->first();
         $reviews = Review::with('mentee')->where('mentor_id', $mentor->id)->get();
         // return $reviews;
         return view('Mentor.Profile.reviews')->with([

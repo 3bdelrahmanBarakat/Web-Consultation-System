@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Mentoring - Login</title>
+        <title>MentotQuest - Login</title>
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets2/img/favicon.png')}}">
@@ -67,20 +67,7 @@
 								</form>
 								<!-- /Form -->
 
-								<div class="text-center forgotpass"><a href="forgot-password.html">Forgot Password?</a></div>
-								{{-- <div class="login-or">
-									<span class="or-line"></span>
-									<span class="span-or">or</span>
-								</div> --}}
 
-								<!-- Social Login -->
-								{{-- <div class="social-login">
-									<span>Login with</span>
-									<a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google"></i></a>
-								</div> --}}
-								<!-- /Social Login -->
-
-								<!-- <div class="text-center dont-have">Don’t have an account? <a href="register.html">Register</a></div> -->
 							</div>
                         </div>
                     </div>

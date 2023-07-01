@@ -89,13 +89,13 @@
 								<span></span>
 							</span>
 						</a>
-						<a href="{{route('mentee.dashboard')}}" class="navbar-brand logo">
+						<a href="/" class="navbar-brand logo">
 							<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
-							<a href="{{route('mentee.dashboard')}}" class="menu-logo">
+							<a href="/" class="menu-logo">
 								<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -125,8 +125,8 @@
 										<img src="{{asset('assets/img/user/user.jpg')}}" alt="User Image" class="avatar-img rounded-circle">
 									</div>
 									<div class="user-text">
-										<h6>{{ Auth::user()->fname }}</h6>
-										<p class="text-muted mb-0">Mentor</p>
+										<h6>{{ Auth::user()->name }}</h6>
+										<p class="text-muted mb-0">Mentee</p>
 									</div>
 								</div>
 

@@ -10,7 +10,11 @@ class MentorController extends Controller
 {
     public function index()
     {
-        $mentors = Mentor::where('status', 1)->paginate();
+        $mentors = Mentor::where('status', 1)
+    ->withSum('bookings', 'total_fees')
+    ->paginate();
+
+
 
         return view('Admin.Mentor.mentor-list')->with('mentors',$mentors);
     }
@@ -32,7 +36,7 @@ class MentorController extends Controller
     public function viewProfile($id)
     {
         $mentor = Mentor::with('about','experience','plans')->find($id);
-        
+
         if($mentor['about']== null || $mentor['experience']== null || count($mentor['plans']) === 0)
         {
             return back()->with('notfinished', 'This account is not finished yet');

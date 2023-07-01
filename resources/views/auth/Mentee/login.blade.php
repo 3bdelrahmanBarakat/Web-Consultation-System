@@ -75,7 +75,7 @@
 										<a class="forgot-link" href="{{ route('password.request') }}">Forgot Password ?</a>
 									</div>
 									<button class="btn btn-primary login-btn" type="submit">Login</button>
-									<div  class="text-center dont-have">Don't have an account? <a href="{{route('register')}}">Register</a></div>
+									<div  class="text-center dont-have">Don't have an account? <a href="{{route('mentee.register')}}">Register</a></div>
 								</form>
 							</div>
 						</div>

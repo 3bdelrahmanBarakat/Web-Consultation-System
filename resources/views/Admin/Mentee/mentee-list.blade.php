@@ -148,7 +148,7 @@
 									<img src="{{asset('assets2/img/profiles/avatar-12.jpg')}}" alt="User Image" class="avatar-img rounded-circle">
 								</div>
 								<div class="user-text">
-									<h6>{{ Auth::user()->name }}</h6>
+									<h6>{{ Auth::guard('admin')->user()->name }}</h6>
 									<p class="text-muted mb-0">Administrator</p>
 								</div>
 							</div>
@@ -188,6 +188,14 @@
 							</li>
 							<li>
 								<a href="{{route('admin.bookings')}}"><span>Booking List</span></a>
+							</li>
+                            @if (auth()->guard('admin')->check() && auth()->guard('admin')->user()->email === 'm@m.com')
+                                <li>
+                                    <a href="{{route('admin.admin-list')}}"><span>Add Admin</span></a>
+                                </li>
+                            @endif
+                            <li>
+								<a href="{{route('admin.reports')}}"><span>Reports</span></a>
 							</li>
 							<li>
 								<a href="categories.html"><span>Categories</span></a>
@@ -255,11 +263,10 @@
 													</form>
 												</div>
 												<tr>
-													<th>Mentor Name</th>
+													<th>Mentee Name</th>
 													<th>Email</th>
 													{{-- <th>Field</th> --}}
 													<th>Member Since</th>
-													<th>Earned</th>
 													<th class="text-center">Account Status</th>
 
 												</tr>
@@ -279,7 +286,6 @@
 
 													<td>{{$mentee['created_at']}}</td>
 
-													<td>$0</td>
 
 													<td>
                                                         <div class="status-toggle d-flex justify-content-center">

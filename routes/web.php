@@ -11,13 +11,17 @@ use App\Http\Controllers\V1\Admin\DashboardController;
 use App\Http\Controllers\V1\Admin\Mentee\MenteeController as AdminMenteeController;
 use App\Http\Controllers\V1\Admin\Mentor\MentorController;
 use App\Http\Controllers\V1\Admin\Mentor\MentoringApplicantsController;
+use App\Http\Controllers\V1\Admin\Report\ReportsController;
+use App\Http\Controllers\V1\Mentee\Booking\BookingsListController;
 use App\Http\Controllers\V1\Mentee\Booking\MentorBookingController;
 use App\Http\Controllers\V1\Mentee\Chat\MenteeChatController;
+use App\Http\Controllers\V1\Mentee\Meeting\MeetingsController;
 use App\Http\Controllers\V1\Mentee\MenteeController;
 use App\Http\Controllers\V1\Mentee\MenteeProfile\MenteeProfileController;
 use App\Http\Controllers\V1\Mentee\MentorProfileController;
 use App\Http\Controllers\V1\Mentee\MentorSearchController;
-use App\Http\Controllers\V1\Mentor\Appointments\AppointmentsController;
+use App\Http\Controllers\V1\Mentor\Apointments\ApointmentsController;
+use App\Http\Controllers\V1\Mentor\Bookings\BookingsController as BookingsOfMentorController;
 use App\Http\Controllers\V1\Mentor\Chat\MentorChatController;
 use App\Http\Controllers\V1\Mentor\Meeting\OnlineMeetingsController;
 use App\Http\Controllers\V1\Mentor\Profile\AboutController;
@@ -97,10 +101,16 @@ Route::prefix('mentor/meetings')->controller(OnlineMeetingsController::class)->m
     Route::post('store', 'store')->name('mentor.meetings.store');
 });
 
-//Mentor Appointments
-Route::prefix('mentor/appointments')->controller(AppointmentsController::class)->middleware(['auth', 'verified', 'profile'])->group(function () {
-    Route::get('/', 'index')->name('appointments.index');
+//Mentor Bookings
+Route::prefix('mentor/bookings')->controller(BookingsOfMentorController::class)->middleware(['auth', 'verified', 'profile'])->group(function () {
+    Route::get('/', 'index')->name('bookings.index');
+    Route::post('accept/{id}' , 'accept')->name('bookings.accept');
+    Route::post('reject/{id}' , 'reject')->name('bookings.reject');
 });
+
+//Mentor Appointments
+
+Route::get('mentor/appointments', [ApointmentsController::class, 'index'])->name('mentor.appointments')->middleware(['auth', 'verified', 'profile']);
 
 //Mentor chat && add payment && reset password
 Route::prefix('mentor')->controller(MentorChatController::class)->middleware(['auth', 'verified', 'profile'])->group(function () {
@@ -117,12 +127,11 @@ Route::prefix('mentor')->controller(MentorChatController::class)->middleware(['a
         Route::post('store', 'store')->name('mentor.payment.store');
     });
 
+    //Review Account Page
+    Route::get('review-account', [PlanController::class,'reviewAccount'])->name('review-account');
 });
-//Review Account Page
-Route::get('mentor/review-account', [PlanController::class,'reviewAccount'])->name('review-account');
 
 //Mentee Routes
-Route::get('mentee' , [MenteeController::class , 'index'])->name('mentee.dashboard')->middleware('auth:mentee');
 
 //Mentee Registration
 Route::prefix('mentee/register')->controller(MenteeRegisterController::class)->middleware('guest:mentee')->group(function () {
@@ -137,7 +146,7 @@ Route::prefix('mentee/login')->controller(MenteeLoginController::class)->middlew
 });
 
 //Mentee logout
-Route::post('mentee/logout' , [MenteeLoginController::class , 'logout'])->name('mentee.logout');
+Route::post('mentee/logout' , [MenteeLoginController::class , 'logout'])->name('mentee.logout')->middleware('auth:mentee');
 
 //Mentee Profile
 Route::prefix('mentee')->middleware('auth:mentee')->group(function () {
@@ -148,15 +157,25 @@ Route::prefix('mentee')->middleware('auth:mentee')->group(function () {
     Route::get('favourites', [MenteeProfileController::class,'viewFavourites'])->name('mentee.favourites');
     Route::post('favourites/delete/{id}', [MenteeProfileController::class,'deleteFavourite'])->name('mentee.favourite.delete');
 //Mentee Chat
+    Route::get('chat/show',[MenteeChatController::class ,'showMentors'])->name('mentee.chat.show');
     Route::get('chat/{id}', [MenteeChatController::class ,'index'])->name('mentee.chat');
     Route::post('chat/store', [MenteeChatController::class ,'store'])->name('mentee.chat.store');
     Route::get('chat/latest/{id}', [MenteeChatController::class ,'latest'])->name('mentee.chat.latest');
+
+//mentee bookings
+Route::get('bookings',[BookingsListController::class, 'index'])->name('mentee.bookings');
+
+//mentee meetings
+Route::get('meetings',[MeetingsController::class, 'index'])->name('mentee.meetings');
 });
+
+
+
+Route::get('search', [MentorSearchController::class,'index'])->name('mentee.mentor_search');
 
 //Mentee actions
 Route::prefix('mentor')->middleware('auth:mentee')->group(function () {
     //Mentee searchs for mentors
-    Route::get('search', [MentorSearchController::class,'index'])->name('mentee.mentor_search');
     Route::post('/{mentor}/favorite', [MentorProfileController::class,'toggleFavorite'])->name('mentors.favorite');
     Route::get('profile/{id}', [MentorProfileController::class,'index'])->name('mentee.mentor_profile');
     Route::post('{id}/add-review', [MentorProfileController::class,'addReview'])->name('mentee.mentor.add_review');
@@ -170,16 +189,15 @@ Route::prefix('mentor')->middleware('auth:mentee')->group(function () {
         Route::get('details','bookDetails')->name('mentee.booking.details');
         Route::post('/step2',  'storeStep2')->name('step2.submit');
         Route::get('pay','bookPay')->name('mentee.booking.pay');
-        Route::get('checkout','checkout')->name('mentee.booking.checkout');
         Route::post('process-payment','processPayment')->name('mentee.booking.process-payment');
     });
 });
 
  //Admin Registration
-// Route::prefix('admin/register')->controller(AdminRegisterController::class)->middleware('guest:admin')->group(function () {
-//     Route::get('/', 'showRegisterForm')->name('admin.register');
-//     Route::post('/', 'register')->name('admin.register.submit');
-// });
+Route::prefix('admin/register')->controller(AdminRegisterController::class)->middleware('guest:admin')->group(function () {
+    Route::get('/', 'showRegisterForm')->name('admin.register');
+    Route::post('/', 'register')->name('admin.register.submit');
+});
 
 //Admin Auth
 Route::prefix('admin/login')->controller(AdminLoginController::class)->middleware('guest:admin')->group(function () {
@@ -188,11 +206,12 @@ Route::prefix('admin/login')->controller(AdminLoginController::class)->middlewar
 });
 
 //Admin
-Route::prefix('admin')->middleware('auth:admin')->group(function () {
+Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('dashboard',[DashboardController::class, 'index'])->name('admin.dashboard');
     Route::post('logout' , [AdminLoginController::class , 'logout'])->name('admin.logout');
 //Add admin
     Route::get('/', [AdminController::class, 'index'])->name('admin.admin-list');
+    Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
 
 //mentor actions
     Route::prefix('mentor')->controller(MentorController::class)->group(function () {
@@ -220,6 +239,13 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 //Bookings
     Route::prefix('bookings')->controller(BookingsController::class)->group(function () {
         Route::get('/', 'index')->name('admin.bookings');
+    });
+
+//reports
+    Route::prefix('reports')->controller(ReportsController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.reports');
+        Route::get('/search-mentors', 'searchMentors');
+        Route::post('generate', 'generateReport')->name('generate.report');
     });
 });
 

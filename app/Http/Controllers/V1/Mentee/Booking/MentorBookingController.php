@@ -3,16 +3,12 @@
 namespace App\Http\Controllers\V1\Mentee\Booking;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Mentee\Booking\BookingDetailsRequest;
-use App\Http\Requests\V1\Mentee\Booking\BookingTimingsRequest;
 use App\Models\Booking\Booking;
 use App\Models\Mentor\Mentor;
-use App\Models\Mentor\Profile\MentorAbout;
 use App\Models\Mentor\Profile\Plan;
+use App\Models\Mentor\Schedule_Timings\ScheduleTiming;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Stripe;
-use Stripe\Charge;
 
 class MentorBookingController extends Controller
 {
@@ -26,7 +22,9 @@ class MentorBookingController extends Controller
     public function bookTimings(Request $request)
     {
 
-        $mentor = Mentor::with('timings')->findOrFail($request->mentor_id);
+        $mentor = Mentor::with(['timings' => function ($query) {
+            $query->where('status', 'pending');
+        }])->findOrFail($request->mentor_id);
         $plan = Plan::where('id', $request->plan_id)->first();
         return view('Mentee.Booking.booking_timings')->with(['mentor' => $mentor, 'plan' => $plan]);
     }
@@ -42,7 +40,7 @@ class MentorBookingController extends Controller
         return redirect()->route('mentee.booking.details');
     }
 
-    public function bookDetails(Request $request)
+    public function bookDetails()
     {
         return view('Mentee.Booking.booking_details');
     }
@@ -91,15 +89,15 @@ class MentorBookingController extends Controller
         $formData->fill($request->session()->get('form.step1', []));
         $formData->fill($request->session()->get('form.step2', []));
         $formData->fill($validatedData);
-        
+
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
         // Get payment information from form
-    $amount = $request->input('amount');
-    $token = $request->input('stripeToken');
+            $amount = $request->input('amount');
+            $token = $request->input('stripeToken');
 
     Booking::create([
         'mentor_id' => $formData['mentor_id'],
-        'mentee_id' => Auth::user()->id,
+        'mentee_id' => Auth::guard('mentee')->user()->id,
         'plan_id' => $formData['plan_id'],
         'timing_id' => $formData['timing_id'],
         'total_fees' => $formData['total_fees'],
@@ -111,21 +109,12 @@ class MentorBookingController extends Controller
         'status' => "pending",
     ]);
 
+    ScheduleTiming::where('id',$formData['timing_id'])->update(['status' => 'booked']);
+
     $request->session()->forget('form');
-
-    // Process payment with Stripe
-
-        // $charge = Charge::create([
-        //     'amount' => $amount,
-        //     'currency' => 'egp',
-        //     'source' => $token,
-        // ]);
 
 
         return view('Mentee.Booking.booking-success');
     }
-    public function checkout()
-    {
 
-    }
 }

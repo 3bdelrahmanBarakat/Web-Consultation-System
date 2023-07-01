@@ -17,7 +17,7 @@ class MenteeProfileController extends Controller
 {
     public function profileSettings()
     {
-        $mentee = Mentee::findOrFail(auth()->user()->id);
+        $mentee = Mentee::findOrFail(auth()->guard('mentee')->user()->id);
 
         return view('Mentee.Profile.profile-settings')->with('mentee', $mentee);
     }
@@ -25,7 +25,7 @@ class MenteeProfileController extends Controller
     public function profileSettingsUpdate(MenteeProfileSettingsRequest $request)
     {
 
-        Mentee::findOrFail(auth()->user()->id)->update([
+        Mentee::findOrFail(auth()->guard('mentee')->user()->id)->update([
             'name' => $request->name,
             'username' => $request->username
         ]);
@@ -48,7 +48,7 @@ class MenteeProfileController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('mentee')->user();
 
         if (!Hash::check($request->old_password, $user->password)) {
             $validator->errors()->add('old_password', 'The old password is incorrect.');
@@ -63,7 +63,7 @@ class MenteeProfileController extends Controller
 
     public function viewFavourites()
     {
-        $favorites = Favorite::with('mentor')->where('mentee_id', auth()->user()->id)->get();
+        $favorites = Favorite::with('mentor')->where('mentee_id', auth()->guard('mentee')->user()->id)->get();
 
         return view('Mentee.Profile.favourites')->with([
             'favorites' => $favorites,

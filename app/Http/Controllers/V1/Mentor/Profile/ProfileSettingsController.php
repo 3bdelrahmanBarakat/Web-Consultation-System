@@ -16,14 +16,14 @@ class ProfileSettingsController extends Controller
 {
     public function edit()
     {
-        $about = MentorAbout::where('mentor_id', Auth::user()->id)->first();
-        $experience = Experience::where('mentor_id', Auth::user()->id)->first();
+        $about = MentorAbout::where('mentor_id', Auth::guard('web')->user()->id)->first();
+        $experience = Experience::where('mentor_id', Auth::guard('web')->user()->id)->first();
         return view('Mentor.Profile.profile-settings')->with(['about' => $about, 'experience' => $experience]);
     }
 
     public function update(ProfileSettingsRequest $request)
     {
-        $mentor= MentorAbout::where('mentor_id', Auth::user()->id)->first();
+        $mentor= MentorAbout::where('mentor_id', Auth::guard('web')->user()->id)->first();
         $oldPhoto = $mentor->photo;
         $oldPath = 'public/Image/'.$oldPhoto;
 
@@ -48,7 +48,7 @@ class ProfileSettingsController extends Controller
             $mentor->save();
         }
 
-        Mentor::findOrFail(Auth::user()->id)->update([
+        Mentor::findOrFail(Auth::guard('web')->user()->id)->update([
             'fname' => $request->fname,
             'lname' => $request->lname,
             'phone' => $request->phone,
@@ -62,7 +62,7 @@ class ProfileSettingsController extends Controller
         $mentor->save();
 
 
-        Experience::where('mentor_id', Auth::user()->id)->update([
+        Experience::where('mentor_id', Auth::guard('web')->user()->id)->update([
             'company_name' => $request->company_name,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,

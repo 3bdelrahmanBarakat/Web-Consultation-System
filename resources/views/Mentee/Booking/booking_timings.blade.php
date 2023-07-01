@@ -45,7 +45,7 @@
 								<span></span>
 							</span>
 						</a>
-						<a href="{{route('mentee.dashboard')}}" class="navbar-brand logo">
+						<a href="/" class="navbar-brand logo">
 							<img src="{{asset('assets/img/logo final mohamed pnggggggg-01.png')}}" class="img-fluid" alt="Logo">
 						</a>
 					</div>
@@ -195,7 +195,7 @@
 						<div class="col-md-8 col-12">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="{{route('mentee.dashboard')}}">Home</a></li>
+									<li class="breadcrumb-item"><a href="/">Home</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Booking</li>
 									<li class="breadcrumb-item active" aria-current="page">Timings</li>
 								</ol>

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('gender');
             $table->unsignedBigInteger('mentor_id');
             $table->date('date_of_birth');
+            $table->string('job_title');
+            $table->text('bio');
             $table->string('address');
             $table->string('country');
             $table->string('city');

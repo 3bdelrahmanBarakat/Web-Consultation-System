@@ -2,6 +2,7 @@
 
 namespace App\Models\Booking;
 
+use App\Models\Meeting\Meeting;
 use App\Models\Mentee\Mentee;
 use App\Models\Mentor\Mentor;
 use App\Models\Mentor\Schedule_Timings\ScheduleTiming;
@@ -26,4 +27,10 @@ class Booking extends Model
     {
         return $this->belongsTo(ScheduleTiming::class);
     }
+    public function meeting()
+    {
+        return $this->hasOne(Meeting::class);
+    }
+
+
 }

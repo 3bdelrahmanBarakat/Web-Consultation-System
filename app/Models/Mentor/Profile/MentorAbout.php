@@ -13,6 +13,8 @@ class MentorAbout extends Model
     protected $fillable = [
         'gender',
         'date_of_birth',
+        'job_title',
+        'bio',
         'mentor_id',
         'address',
         'country',

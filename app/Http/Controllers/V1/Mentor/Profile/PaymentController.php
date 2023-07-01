@@ -13,7 +13,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $about = MentorAbout::where('mentor_id', auth()->user()->id)->first();
+        $about = MentorAbout::where('mentor_id', auth()->guard('web')->user()->id)->first();
         return view('Mentor.Profile.payment')->with([
             'about' => $about,
         ]);
@@ -34,13 +34,13 @@ class PaymentController extends Controller
 
         MentorPayment::create([
             'account_holder_name' => $token['bank_account']['account_holder_name'],
-            'mentor_id' => auth()->user()->id,
+            'mentor_id' => auth()->guard('web')->user()->id,
             'stripe_token' => $token['bank_account']['id'],
             'routing_number' => $token['bank_account']['routing_number'],
             'last4' => $token['bank_account']['last4']
         ]);
 
-        Mentor::findOrFail(auth()->user()->id)->update([
+        Mentor::findOrFail(auth()->guard('web')->user()->id)->update([
             'status' => "1"
         ]);
 

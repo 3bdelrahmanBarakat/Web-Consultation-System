@@ -7,7 +7,6 @@ use App\Http\Requests\V1\Mentor\Profile_setup\AboutRequest;
 use App\Models\Mentor\Profile\Experience;
 use App\Models\Mentor\Profile\MentorAbout;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AboutController extends Controller
 {
@@ -20,7 +19,7 @@ class AboutController extends Controller
 
     public function store(AboutRequest $request)
     {
-        
+
         if($request->file('photo')){
             $file= $request->file('photo');
             $filename= date('YmdHi').$file->getClientOriginalName();
@@ -30,6 +29,8 @@ class AboutController extends Controller
         MentorAbout::create([
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
+            'job_title' => $request->job_title,
+            'bio' => $request->bio,
             'mentor_id' => $request->mentor_id,
             'address' => $request->address,
             'country' => $request->country,

@@ -243,13 +243,12 @@
 								<div class="custom-sidebar-nav">
 									<ul>
 										<li><a href="{{route('home')}}" class="active"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="{{route('appointments.index')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('bookings.index')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('schedule-timings.index')}}"><i class="fas fa-hourglass-start"></i>Schedule Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="#"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentor.appointments')}}"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
+                                        <li><a href="{{route('mentor.meetings')}}"><i class="fas fa-video"></i>Meetings <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('mentor.chat.show')}}"><i class="fas fa-comments"></i>Messages <span><i class="fas fa-chevron-right"></i></span></a></li>
-										{{-- <li><a href="invoices.html"><i class="fas fa-file-invoice"></i>Invoices <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="reviews.html"><i class="fas fa-eye"></i>Reviews <span><i class="fas fa-chevron-right"></i></span></a></li> --}}
-										<!-- <li><a href="blog.html"><i class="fab fa-blogger-b"></i>Blog <span><i class="fas fa-chevron-right"></i></span></a></li> -->
+										<li><a href="{{route('mentor.reviews')}}"><i class="fas fa-eye"></i>Reviews <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('profile-settings.edit')}}"><i class="fas fa-user-cog"></i>Profile <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li>
                                             <form  action="{{ route('logout') }}" method="POST">
@@ -330,12 +329,18 @@
 													</div>
 												</div>
 											</div>
-											{{-- <div class="col-12 col-md-6">
+											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Job Title</label>
-													<input type="text" class="form-control" value="Software engineering">
+													<input type="text" name="job_title" class="form-control" value="{{$about->job_title}}">
 												</div>
-											</div> --}}
+											</div>
+                                            <div class="col-12">
+												<div class="form-group">
+												<label>bio</label>
+												<textarea name="bio" cols="150" rows="3" placeholder="Write your Bio">{{$about->bio}}</textarea>
+												</div>
+											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Company</label>
@@ -366,7 +371,7 @@
 													</select>
 												</div>
 											</div> --}}
-											<div class="col-12 col-md-12">
+											<div class="col-12 col-md-6">
 												<div class="form-group">
 
 													<label>Years of experience </label>
@@ -407,7 +412,7 @@
                                             <div class="col-12">
 												<div class="form-group">
 												<label>Description</label>
-												<textarea name="description" cols="150" rows="3" placeholder="Write your Bio">{{$experience->description}}</textarea>
+												<textarea name="description" cols="150" rows="3" placeholder="Write your job description">{{$experience->description}}</textarea>
 												</div>
 											</div>
 

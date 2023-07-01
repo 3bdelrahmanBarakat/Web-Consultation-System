@@ -13,9 +13,9 @@ class MentorChatController extends Controller
 {
     public function showMentees()
     {
-        $about = MentorAbout::where('mentor_id',auth()->user()->id )->first();
+        $about = MentorAbout::where('mentor_id',auth()->guard('web')->user()->id )->first();
         $mentees = Message::with('mentee')->select('mentor_id', 'mentee_id')
-        ->where('mentor_id', auth()->user()->id)
+        ->where('mentor_id', auth()->guard('web')->user()->id)
         ->distinct()
         ->get();
 
@@ -26,11 +26,11 @@ class MentorChatController extends Controller
     }
     public function index($id)
     {
-        $about = MentorAbout::where('mentor_id',auth()->user()->id )->first();
+        $about = MentorAbout::where('mentor_id',auth()->guard('web')->user()->id )->first();
         $mentee_name = Mentee::findOrFail($id);
         $messages = Message::where('mentee_id', $id)->where('mentor_id',auth()->user()->id)->get();
         $mentees = Message::with('mentee')->select('mentor_id', 'mentee_id')
-        ->where('mentor_id', auth()->user()->id)
+        ->where('mentor_id', auth()->guard('web')->user()->id)
         ->distinct()
         ->get();
 
@@ -49,7 +49,7 @@ class MentorChatController extends Controller
 
         Message::create([
             'mentee_id' => $request->mentee_id,
-            'mentor_id' => auth()->user()->id,
+            'mentor_id' => auth()->guard('web')->user()->id,
             'content' => $request->message_content,
             'type' => "0"
         ]);
@@ -57,7 +57,7 @@ class MentorChatController extends Controller
 
     public function latest($id)
 {
-    $messages = Message::where('mentee_id', $id)->where('mentor_id',auth()->user()->id)->orderBy('created_at', 'desc')->limit(20)->get()->reverse()->values();
+    $messages = Message::where('mentee_id', $id)->where('mentor_id',auth()->guard('web')->user()->id)->orderBy('created_at', 'desc')->limit(20)->get()->reverse()->values();
     return response()->json($messages);
 }
 }

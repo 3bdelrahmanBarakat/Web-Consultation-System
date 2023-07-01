@@ -218,7 +218,7 @@
 									</div>
 									<div class="user-info-cont">
 										<h4 class="usr-name">{{ Auth::user()->fname }}</h4>
-										<p class="mentor-type">English Literature (M.A)</p>
+										{{-- <p class="mentor-type">English Literature (M.A)</p> --}}
 									</div>
 								</div>
                                 @if (auth::user()->status == 0)
@@ -234,10 +234,11 @@
                                 @endif
 								<div class="custom-sidebar-nav">
 									<ul>
-										<li><a href="{{route('home')}}" class="active"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="{{route('appointments.index')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('home')}}"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('bookings.index')}}" ><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('schedule-timings.index')}}"><i class="fas fa-hourglass-start"></i>Schedule Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="#"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentor.appointments')}}" class="active"><i class="fas fa-calendar-check"></i>Appointments <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentor.meetings')}}"><i class="fas fa-video"></i>Meetings <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('mentor.chat.show')}}"><i class="fas fa-comments"></i>Messages <span><i class="fas fa-chevron-right"></i></span></a></li>
 										{{-- <li><a href="invoices.html"><i class="fas fa-file-invoice"></i>Invoices <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="reviews.html"><i class="fas fa-eye"></i>Reviews <span><i class="fas fa-chevron-right"></i></span></a></li> --}}
@@ -259,7 +260,7 @@
 
 						<div class="col-md-7 col-lg-8 col-xl-9">
 							<div class="appointments">
-                                @foreach ($bookings as $booking )
+                                @foreach ($apointments as $apointment )
 
                                 <!-- Appointment List -->
 								<div class="appointment-list">
@@ -268,24 +269,19 @@
 											<img src="{{asset('assets/img/user/user2.jpg')}}" alt="User Image">
 										</a>
 										<div class="profile-det-info">
-											<h3><a href="profile-mentee.html">{{$booking['mentee']['name']}}</a></h3>
+											<h3><a href="profile-mentee.html">{{$apointment['mentee']['name']}}</a></h3>
 											<div class="mentee-details">
 												{{-- <h5><i class="far fa-clock"></i> 14 Nov 2019, 10.00 AM</h5> --}}
-												<h5><i class="fas fa-envelope"></i>{{$booking['mentee']['email']}}</h5>
-												<h5 class="mb-0"><i class="fas fa-phone"></i> {{$booking['mentee']['username']}}</h5>
+												<h5><i class="fas fa-envelope"></i>{{$apointment['mentee']['email']}}</h5>
+												<h5 class="mb-0"><i class="fas fa-phone"></i> {{$apointment['mentee']['username']}}</h5>
 											</div>
 										</div>
 									</div>
 									<div class="appointment-action">
-										<a href="#" class="btn btn-sm bg-info-light" data-bs-toggle="modal" data-bs-target="#appt_details{{$booking->id}}">
+										<a href="#" class="btn btn-sm bg-info-light" data-bs-toggle="modal" data-bs-target="#appt_details{{$apointment->id}}">
 											<i class="far fa-eye"></i> View
 										</a>
-										<a href="#" class="btn btn-sm bg-success-light" data-bs-toggle="modal" data-bs-target="#accept_details">
-											<i class="fas fa-check"></i> Accept
-										</a>
-										<a href="#" class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-bs-target="#cancel_details">
-											<i class="fas fa-times"></i> Cancel
-										</a>
+
 									</div>
 								</div>
 								<!-- /Appointment List -->
@@ -431,11 +427,11 @@
 
 		</div>
 		<!-- /Main Wrapper -->
-        @foreach ($bookings as $booking )
+        @foreach ($apointments as $apointment )
 
         <!-- Appointment Details Modal -->
 
-        <div class="modal fade custom-modal" id="appt_details{{$booking->id}}">
+        <div class="modal fade custom-modal" id="appt_details{{$apointment->id}}">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -451,19 +447,30 @@
 									<div class="row">
 										<div class="col-md-6">
 											<span class="title">#APT0001</span>
-											<span class="text">{{$booking['timing']['day']}}, <br> From: {{$booking['timing']['start_time']}} <br> To:{{$booking['timing']['end_time']}}</span>
+											<span class="text">{{$apointment['timing']['day']}}, <br> From: {{$apointment['timing']['start_time']}} <br> To:{{$apointment['timing']['end_time']}}</span>
 										</div>
+
 										<div class="col-md-6">
 											<div class="text-end">
-												<button type="button" class="btn bg-success-light btn-sm" id="topup_status">{{$booking['status']}}</button>
+												<button type="button" class="btn bg-success-light btn-sm" id="topup_status">{{$apointment['status']}}</button>
 											</div>
+										</div>
+
+                                        <div class="col-md-12">
+											<span class="title">Zoom Start Url</span>
+                                            <a class="text" style="color: blue" href="{{$apointment['meeting']['start_url']}}">Click here to start meeting</a>
+
+										</div>
+										<div class="col-md-12">
+											<span class="title">Zoom Join Url</span>
+                                            <a class="text" style="color: blue" href="{{$apointment['meeting']['join_url']}}">Click here to join meeting</a>
 										</div>
 									</div>
 								</div>
 							</li>
 							<li>
 								<span class="title">Status:</span>
-								<span class="text">{{$booking['status']}}</span>
+								<span class="text">{{$apointment['status']}}</span>
 							</li>
 							{{-- <li>
 								<span class="title">Confirm Date:</span>
@@ -471,23 +478,23 @@
 							</li> --}}
 							<li>
 								<span class="title">Paid Amount</span>
-								<span class="text">${{$booking['total_fees']}}</span>
+								<span class="text">${{$apointment['total_fees']}}</span>
 							</li>
 							<li>
 								<span class="title">Brief word about me and Why am I seeking your help</span>
-								<span class="text">{{$booking['message1']}}</span>
+								<span class="text">{{$apointment['message1']}}</span>
 							</li>
 							<li>
 								<span class="title">My goal and steps I need to take</span>
-								<span class="text">{{$booking['message2']}}</span>
+								<span class="text">{{$apointment['message2']}}</span>
 							</li>
 							<li>
 								<span class="title">Areas I need guiding in</span>
-								<span class="text">{{$booking['message3']}}</span>
+								<span class="text">{{$apointment['message3']}}</span>
 							</li>
 							<li>
 								<span class="title">The biggest challenges I am facing</span>
-								<span class="text">{{$booking['message4']}}</span>
+								<span class="text">{{$apointment['message4']}}</span>
 							</li>
 						</ul>
 					</div>
@@ -495,6 +502,7 @@
 			</div>
 		</div>
 		<!-- /Appointment Details Modal -->
+
 
         @endforeach
 

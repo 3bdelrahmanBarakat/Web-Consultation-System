@@ -11,7 +11,6 @@ class BookingsController extends Controller
     public function index()
     {
         $bookings = Booking::with('mentor','mentee','timing')->paginate();
-        // return $bookings;
         return view('Admin.Booking.bookings')->with('bookings', $bookings);
     }
 }

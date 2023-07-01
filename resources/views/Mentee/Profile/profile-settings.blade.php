@@ -65,7 +65,7 @@
 								</ul> -->
 							</li>
 							<li class="has-submenu">
-								<a href="">Bookings</a>
+								<a href="{{route('mentee.bookings')}}">Bookings</a>
 
 							</li>
 							<li class="has-submenu active">
@@ -98,11 +98,14 @@
 										<p class="text-muted mb-0">Mentee</p>
 									</div>
 								</div>
-								<a class="dropdown-item" href="dashboard.html">Bookings</a>
-								<a class="dropdown-item" href="dashboard.html">Applications</a>
+								<a class="dropdown-item" href="{{route('mentee.bookings')}}">Bookings</a>
+								<a class="dropdown-item" href="{{route('mentee.meetings')}}">Meetings</a>
 								<a class="dropdown-item" href="{{route('mentee.favourites')}}">favourites</a>
-								<a class="dropdown-item" href="profile-settings.html">Profile Settings</a>
-								<a class="dropdown-item" href="login.html">Logout</a>
+								<a class="dropdown-item" href="{{route('mentee.profile-settings')}}">Profile Settings</a>
+								<form  action="{{ route('mentee.logout') }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item">Logout</button>
+                                </form>
 							</div>
 						</li>
 						<!-- /User Menu -->
@@ -153,10 +156,17 @@
 								<div class="custom-sidebar-nav">
 									<ul>
 
-										<li><a href="bookings.html"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="chat.html"><i class="fas fa-comments"></i> Applications <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentee.bookings')}}"><i class="fas fa-clock"></i>Bookings <span><i class="fas fa-chevron-right"></i></span></a></li>
+										<li><a href="{{route('mentee.meetings')}}"><i class="fas fa-video"></i> Meetings <span><i class="fas fa-chevron-right"></i></span></a></li>
+                                        <li><a href="{{route('mentee.chat.show')}}"><i class="fas fa-comments"></i> Messages <span><i class="fas fa-chevron-right"></i></span></a></li>
 										<li><a href="{{route('mentee.favourites')}}"><i class="fas fa-user-cog"></i> Favourites <span><i class="fas fa-chevron-right"></i></span></a></li>
-										<li><a href="login.html"><i class="fas fa-sign-out-alt"></i>Logout <span><i class="fas fa-chevron-right"></i></span></a></li>
+                                        <li>
+                                            <form  action="{{ route('mentee.logout') }}" method="POST">
+                                            @csrf
+                                             <button style="background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"  href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                                             <span style="float: right"><i class="fas fa-chevron-right"></i></span>
+                                             </form>
+                                        </li>
 									</ul>
 								</div>
 							</div>
@@ -294,7 +304,7 @@
 										<li><a href="search.html">Search Mentors</a></li>
 										<li><a href="login.html">Login</a></li>
 										<li><a href="register.html">Register</a></li>
-										<li><a href="booking.html">Booking</a></li>
+										<li><a href="{{route('mentee.bookings')}}">Booking</a></li>
 										<li><a href="dashboard-mentee.html">Mentee Dashboard</a></li>
 									</ul>
 								</div>

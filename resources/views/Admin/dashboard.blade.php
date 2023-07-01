@@ -145,7 +145,7 @@
 									<img src="{{asset('assets2/img/profiles/avatar-12.jpg')}}" alt="User Image" class="avatar-img rounded-circle">
 								</div>
 								<div class="user-text">
-									<h6>{{ Auth::user()->name }}</h6>
+									<h6>{{ Auth::guard('admin')->user()->name }}</h6>
 									<p class="text-muted mb-0">Administrator</p>
 								</div>
 							</div>
@@ -187,11 +187,14 @@
 							<li>
 								<a href="{{route('admin.bookings')}}"><span>Booking List</span></a>
 							</li>
-							@if (auth()->check() && auth()->user()->email === 'm@m.com')
+							@if (auth()->guard('admin')->check() && auth()->guard('admin')->user()->email === 'm@m.com')
                                 <li>
                                     <a href="{{route('admin.admin-list')}}"><span>Add Admin</span></a>
                                 </li>
                             @endif
+                            <li>
+								<a href="{{route('admin.reports')}}"><span>Reports</span></a>
+							</li>
 							<li>
 								<a href="categories.html"><span>Categories</span></a>
 							</li>
@@ -233,7 +236,7 @@
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="page-title">Welcome {{ Auth::user()->name }}!</h3>
+								<h3 class="page-title">Welcome {{ Auth::guard('admin')->user()->name }}!</h3>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item active">Dashboard</li>
 								</ul>

@@ -13,7 +13,7 @@ class MentorProfileController extends Controller
     public function index($id)
     {
        $mentor = Mentor::with('about', 'experience' , 'plans')->findOrFail($id);
-       $mentor_fav = Favorite::where('mentee_id', auth()->user()->id)->where('mentor_id', $id)->first();
+       $mentor_fav = Favorite::where('mentee_id', auth()->guard('mentee')->user()->id)->where('mentor_id', $id)->first();
        return view('Mentee.Mentor_search.mentor_profile')->with([
         'mentor'=> $mentor,
         'mentor_fav' => $mentor_fav
@@ -23,7 +23,7 @@ class MentorProfileController extends Controller
     public function toggleFavorite($mentor)
     {
 
-        $mentee = auth()->user();
+        $mentee = auth()->guard('mentee')->user();
         $favorites = Favorite::where('mentor_id', $mentor)->where('mentee_id', $mentee->id)->first();
 
         if (!$favorites) {
@@ -43,7 +43,7 @@ class MentorProfileController extends Controller
 
     public function addReview($id, Request $request)
     {
-        $mentee = auth()->user();
+        $mentee = auth()->guard('mentee')->user();
 
         Review::create([
             'mentor_id' => $id,

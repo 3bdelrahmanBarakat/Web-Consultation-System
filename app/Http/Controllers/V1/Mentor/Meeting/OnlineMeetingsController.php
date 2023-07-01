@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\V1\Mentor\Meeting;
 
 use App\Http\Controllers\Controller;
-use MacsiDigital\Zoom\Facades\Zoom;
-use App\Models\ZoomMeeting;
 use App\Http\Requests\API\V1\Mentor\Meetings\StoreMeetRequest;
 use App\Http\Requests\V1\Mentor\Meeting\OnlineMeetingRequest;
 use App\Models\Booking\Booking;
@@ -22,9 +20,9 @@ class OnlineMeetingsController  extends Controller
     public function index()
     {
 
-        $meetings = Meeting::with('mentee')->where('mentor_id', auth()->user()->id)->get();
-        $mentees = Booking::with('mentee')->where('mentor_id', auth()->user()->id)->distinct()->get("mentee_id","mentee");
-        $about = MentorAbout::where('mentor_id', auth()->user()->id)->first();
+        $meetings = Meeting::with('mentee')->where('mentor_id', auth()->guard('web')->user()->id)->get();
+        $mentees = Booking::with('mentee')->where('mentor_id', auth()->guard('web')->user()->id)->distinct()->get("mentee_id","mentee");
+        $about = MentorAbout::where('mentor_id', auth()->guard('web')->user()->id)->first();
         return view('Mentor.Meeting.meetings')->with([
             'meetings'=> $meetings,
             'about'=> $about,
@@ -38,10 +36,11 @@ class OnlineMeetingsController  extends Controller
             $meet_data = [
                 'topic' => "new topic",
                 'start_time' => $request->start_time,
-                'duration' => $request->duration,
-                'password' => $request->password,
+                'duration' => "40",
+                'password' => "12345678",
                 'time_zone' => "Africa/Cairo",
             ];
+
 
             $meeting = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->generateJWT(),
@@ -49,9 +48,9 @@ class OnlineMeetingsController  extends Controller
             ])->post('https://api.zoom.us/v2/users/me/meetings', $meet_data)->json();
 
              Meeting::create([
-                'mentor_id' => auth()->user()->id,
+                'mentor_id' => auth()->guard('web')->user()->id,
                 'mentee_id' => $request->mentee_id,
-                // 'booking_id' => $request->validated('booking_id'),
+                'booking_id' => $request->booking_id,
 
                 'meeting_id' => $meeting['id'],
                 'topic' => $meeting['topic'],

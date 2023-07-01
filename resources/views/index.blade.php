@@ -44,13 +44,13 @@
 								<span></span>
 							</span>
 						</a>
-						<a href="index.html" class="navbar-brand logo">
+						<a href="/" class="navbar-brand logo">
 							<img src="assets/img/logo final mohamed pnggggggg-01.png" class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
-							<a href="index.html" class="menu-logo">
+							<a href="/" class="menu-logo">
 								<img src="assets/img/logo final mohamed pnggggggg-01.png" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -153,7 +153,36 @@
 							</li>
 						</ul>
 					</div>
-                    @if (Route::has('login'))
+
+         <ul class="nav header-navbar-rht">
+
+        @if (auth()->guard('web')->check())
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('home')}}">Dashboard</a>
+            <form  action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button class="dropdown-item">Logout</button>
+            </form>
+        </li>
+        <!-- Check if user's guard is 'mentee' -->
+        @elseif (auth()->guard('mentee')->check())
+            <a href="{{ route('mentee.bookings') }}">Dashboard</a>
+            <form  action="{{ route('mentee.logout') }}" method="POST">
+                @csrf
+                <button class="dropdown-item">Logout</button>
+            </form>
+
+    @else
+        <!-- Display login and register buttons for unauthenticated users -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('login') }}">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link header-login" href="{{ route('register') }}">Register</a>
+        </li>
+    @endif
+</ul>
+                    {{-- @if (Route::has('login'))
 					<ul class="nav header-navbar-rht">
                         @auth
 
@@ -171,7 +200,7 @@
                         @endif
                         @endauth
 					</ul>
-                    @endif
+                    @endif --}}
 				</nav>
 				</div>
 			</header>
@@ -188,9 +217,9 @@
 
 						<!-- Search -->
 						<div class="search-box">
-							<form action="search.html">
+							<form action="{{route('mentee.mentor_search')}}">
 								<div class="form-group search-info">
-									<input type="text" class="form-control" placeholder="Search Mentors, Consultation Type, etc">
+									<input type="text" name="query" class="form-control" placeholder="Search Mentors, Consultation Type, etc">
 								</div>
 								<button type="submit" class="btn btn-primary search-btn"><i><img src="assets/img/search-submit.png" alt=""></i> <span>Search</span></button>
 							</form>

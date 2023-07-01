@@ -23,5 +23,9 @@ class Meeting extends Model
     {
         return $this->belongsTo(Mentee::class);
     }
+    public function bookings()
+    {
+        return $this->belongsTo(Booking::class);
+    }
 
 }
